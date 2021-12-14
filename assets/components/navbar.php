@@ -10,8 +10,8 @@
             <a href="#" class="nav-link">Notre équipe</a>
         </div>
         <div class="navbar-nav ml-auto">
-            <a href='../views/auth/login.php' class="btn btn-dark mr-3 ml-5">Connexion</a>
-            <a href='../views/register.php' class="btn btn-light">Enregistement</a>
+            <a href='/views/auth/login.php' class="btn btn-dark mr-3 ml-5">Connexion</a>
+            <a href='/views/register.php' class="btn btn-light">Enregistement</a>
         </div>
     </div>
 </nav>
