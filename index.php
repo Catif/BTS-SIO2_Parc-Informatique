@@ -12,7 +12,7 @@ require './assets/components/navbar.php';
     <p>Les appareils pris en compte sont par exemple :
         <ul>
             <li>Les ordinateurs</li>
-            <li>Les ordinateurs portables</li>
+            <li>Les ordinateugfjvhfjvkuv urs portables</li>
             <li>Les téléphones</li>
             <li>Les tablettes</li>
         </ul>
