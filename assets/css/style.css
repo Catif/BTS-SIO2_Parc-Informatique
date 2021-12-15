@@ -3,7 +3,9 @@
     --color-font-header: #ffffff;
 
     --color-font: #15092A;
-    --color-font-black: #2B1155;
+
+    --color-bg-box: #2B1155;
+    --color-bg-box-icon: #F9F7FD;
 
     --color-bg-container: #f6f2fc; /* f6f2fc */
 }
@@ -55,4 +57,23 @@ body{
 .btn.btn-primary{
     background-color: #36166A;
     border-color: #36166A;
+}
+
+
+
+.card .card-img-top{
+    background-color: var(--color-bg-box);
+    color: var(--color-bg-box-icon);
+}
+
+.card .card-img-top i{
+    font-size:80px
+}
+
+.card .card-body .card-title{
+    font-size: 16px;
+}
+
+.input-required{
+    color: red;
 }
