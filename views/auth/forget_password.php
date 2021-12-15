@@ -10,7 +10,6 @@ require dirname(__DIR__ , 2) . '/assets/components/header.php';
 
 $access = false;
 
-$email = new Email();
 
 
 ?>
