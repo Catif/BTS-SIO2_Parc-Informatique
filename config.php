@@ -5,7 +5,7 @@ if( session_status() == PHP_SESSION_NONE ){
 }
 
 // Définir le chemin de l'application
-define("BASE_URL", "http://localhost:3000");
+define("BASE_URL", "http://localhost:8000");
 define("SITE_ROOT", __DIR__);
 
 // Initialisation de la base de donnée
