@@ -1,8 +1,24 @@
 <?php 
 
+
 $title = 'Connexion';
 
 require dirname(__DIR__ , 2) . '/assets/components/header.php';
+
+if(isset($_POST['email'], $_POST['password'])) {
+    $query = $db->query('SELECT id_utilisateur, utilisateur.role  FROM utilisateur WHERE mail = :mail AND mot_de_passe = :mot_de_passe', [
+        ':mail' => $_POST['email'],
+        ':mot_de_passe' => $_POST['password']
+    ]);
+    $user = $query->fetch();
+    var_dump($user);
+    if($user !== false){
+        $_SESSION['role'] = $user->role;
+        $_SESSION['id_utilisateur'] = $user->id_utilisateur;
+        header('Location:'. BASE_URL .'/views/panel/equipement.php');
+        exit();
+    }
+}
 ?>
 
 <section class="container pb-3">
@@ -10,7 +26,7 @@ require dirname(__DIR__ , 2) . '/assets/components/header.php';
         <div>
             <h2 class="text-center">Connexion</h2>
             <p>Veuillez rentrer vos informations pour accéder au site</p>
-            <form method="POST" action="./">
+            <form method="POST" action="./login.php">
                 <div class="form-group">
                     <label for="" class="mb-2">E-Mail</label>
                     <input type="email" name="email" placeholder="Courrier électronique" class="form-control" required>
