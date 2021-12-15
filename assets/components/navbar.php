@@ -31,7 +31,7 @@
                 <a href='<?= BASE_URL .'/views/auth/register.php' ?>' class="btn btn-light mx-2">Enregistement</a>
             <?php endif; ?>
             <?php if($_SESSION['role'] !== 'visitor'): ?>
-                <a href='<?= BASE_URL .'/views/auth/register.php' ?>' class="btn btn-light mx-2">Deconnexion</a>
+                <a href='<?= BASE_URL .'/views/logout.php' ?>' class="btn btn-light mx-2">Deconnexion</a>
             <?php endif; ?>
         </div>
     </div>
