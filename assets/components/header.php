@@ -18,4 +18,5 @@ if(isset($title)){
         <link rel="stylesheet" href="<?= BASE_URL .'/assets/css/style.css' ?>">
     </head>
     <body>
+        
     <?php require __DIR__ . '/navbar.php'; ?>

@@ -1,8 +1,7 @@
 <?php
 $title = 'Accueil - Parc Informatique';
 
-require './assets/components/header.php';
-require './assets/components/navbar.php';
+require __DIR__ . '/assets/components/header.php';
 ?>
 
 

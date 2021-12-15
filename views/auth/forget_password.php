@@ -3,7 +3,6 @@
 $title = "Mot de passe oublié";
 
 require dirname(__DIR__ , 2) . '/assets/components/header.php';
-require dirname(__DIR__ , 2) . '/assets/components/navbar.php';
 
 ?>
 

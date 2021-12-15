@@ -3,7 +3,6 @@
 $title = 'S\'enregistrer';
 
 require dirname(__DIR__ , 2) . '/assets/components/header.php';
-require dirname(__DIR__ , 2) . '/assets/components/navbar.php';
 ?>
 
 <section class="container pb-4 mb-5">
