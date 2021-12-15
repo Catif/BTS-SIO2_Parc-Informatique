@@ -3,8 +3,8 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : lun. 13 déc. 2021 à 20:26
--- Version du serveur :  5.7.31
+-- Généré le : mer. 15 déc. 2021 à 13:31
+-- Version du serveur :  10.6.4-MariaDB
 -- Version de PHP : 7.3.21
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
@@ -29,13 +29,18 @@ SET time_zone = "+00:00";
 
 DROP TABLE IF EXISTS `classe`;
 CREATE TABLE IF NOT EXISTS `classe` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
-  `CLASSE` varchar(55) DEFAULT NULL,
-  `CLASSE_COMPLET` varchar(55) DEFAULT NULL,
-  `SPECIALITE` varchar(10) DEFAULT NULL,
-  `SPECIALITE_COMPLET` varchar(128) DEFAULT NULL,
-  PRIMARY KEY (`ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `CLASSE` varchar(55) NOT NULL,
+  PRIMARY KEY (`CLASSE`),
+  UNIQUE KEY `CLASSE` (`CLASSE`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+
+--
+-- Déchargement des données de la table `classe`
+--
+
+INSERT INTO `classe` (`CLASSE`) VALUES
+('SIO2 SISR'),
+('SIO2 SLAM');
 
 -- --------------------------------------------------------
 
@@ -47,16 +52,25 @@ DROP TABLE IF EXISTS `detient`;
 CREATE TABLE IF NOT EXISTS `detient` (
   `ID` int(11) NOT NULL AUTO_INCREMENT,
   `ID_UTILISATEUR` int(11) DEFAULT NULL,
-  `PORTABLE` tinyint(1) NOT NULL DEFAULT '0',
-  `TABLETTE` tinyint(1) NOT NULL DEFAULT '0',
-  `ORDI_FIXE` tinyint(1) NOT NULL DEFAULT '0',
-  `ORDI_PORTABLE` tinyint(1) NOT NULL DEFAULT '0',
-  `FAI` tinyint(1) NOT NULL DEFAULT '0',
-  `CAMERA` tinyint(1) NOT NULL DEFAULT '0',
-  `MICROPHONE` tinyint(1) NOT NULL DEFAULT '0',
+  `PORTABLE` tinyint(1) NOT NULL,
+  `TABLETTE` tinyint(1) NOT NULL,
+  `ORDI_FIXE` tinyint(1) NOT NULL,
+  `ORDI_PORTABLE` tinyint(1) NOT NULL,
+  `FAI` tinyint(1) NOT NULL,
+  `CAMERA` tinyint(1) NOT NULL,
+  `MICROPHONE` tinyint(1) NOT NULL,
   PRIMARY KEY (`ID`),
+  UNIQUE KEY `ID` (`ID`),
   KEY `ID_UTILISATEUR` (`ID_UTILISATEUR`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb3;
+
+--
+-- Déchargement des données de la table `detient`
+--
+
+INSERT INTO `detient` (`ID`, `ID_UTILISATEUR`, `PORTABLE`, `TABLETTE`, `ORDI_FIXE`, `ORDI_PORTABLE`, `FAI`, `CAMERA`, `MICROPHONE`) VALUES
+(1, 1, 1, 1, 1, 1, 1, 1, 1),
+(2, 2, 0, 0, 0, 0, 1, 1, 0);
 
 -- --------------------------------------------------------
 
@@ -72,8 +86,9 @@ CREATE TABLE IF NOT EXISTS `fai` (
   `DEBIT_ASCENDANT_FAI` double DEFAULT NULL,
   `DEBIT_DESCENDANT_FAI` double DEFAULT NULL,
   PRIMARY KEY (`ID`),
+  UNIQUE KEY `ID` (`ID`),
   KEY `ID_UTILISATEUR` (`ID_UTILISATEUR`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
 -- --------------------------------------------------------
 
@@ -91,8 +106,9 @@ CREATE TABLE IF NOT EXISTS `ordi_fixe` (
   `RAM` int(11) DEFAULT NULL,
   `STOCKAGE` int(11) DEFAULT NULL,
   PRIMARY KEY (`ID`),
+  UNIQUE KEY `ID` (`ID`),
   KEY `ID_UTILISATEUR` (`ID_UTILISATEUR`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
 -- --------------------------------------------------------
 
@@ -111,8 +127,9 @@ CREATE TABLE IF NOT EXISTS `ordi_portable` (
   `RAM` int(11) DEFAULT NULL,
   `STOCKAGE` int(11) DEFAULT NULL,
   PRIMARY KEY (`ID`),
+  UNIQUE KEY `ID` (`ID`),
   KEY `ID_UTILISATEUR` (`ID_UTILISATEUR`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
 -- --------------------------------------------------------
 
@@ -132,8 +149,9 @@ CREATE TABLE IF NOT EXISTS `portable` (
   `FAI` varchar(32) DEFAULT NULL,
   `DATA_GO` double DEFAULT NULL,
   PRIMARY KEY (`ID`),
+  UNIQUE KEY `ID` (`ID`),
   KEY `ID_UTILISATEUR` (`ID_UTILISATEUR`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
 -- --------------------------------------------------------
 
@@ -153,8 +171,9 @@ CREATE TABLE IF NOT EXISTS `tablette` (
   `FAI` varchar(32) DEFAULT NULL,
   `DATA_GO` double DEFAULT NULL,
   PRIMARY KEY (`ID`),
+  UNIQUE KEY `ID` (`ID`),
   KEY `ID_UTILISATEUR` (`ID_UTILISATEUR`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
 -- --------------------------------------------------------
 
@@ -165,18 +184,72 @@ CREATE TABLE IF NOT EXISTS `tablette` (
 DROP TABLE IF EXISTS `utilisateur`;
 CREATE TABLE IF NOT EXISTS `utilisateur` (
   `ID_UTILISATEUR` int(11) NOT NULL AUTO_INCREMENT,
-  `ID` int(11) DEFAULT NULL,
-  `ROLE` varchar(32) NOT NULL,
+  `CLASSE` varchar(55) DEFAULT NULL,
+  `TYPE` varchar(32) NOT NULL,
   `NOM` varchar(32) DEFAULT NULL,
   `PRENOM` varchar(32) DEFAULT NULL,
-  `DATE_NAISSANCE` datetime DEFAULT NULL,
   `MAIL` varchar(128) NOT NULL,
   `MOT_DE_PASSE` varchar(128) NOT NULL,
-  `SPECIALITE` varchar(10) DEFAULT NULL,
-  `NUMERO_TEL` varchar(16) DEFAULT NULL,
+  `ROLE` varchar(32) NOT NULL,
   PRIMARY KEY (`ID_UTILISATEUR`),
-  KEY `ID` (`ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  UNIQUE KEY `ID_UTILISATEUR` (`ID_UTILISATEUR`),
+  KEY `CLASSE` (`CLASSE`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb3;
+
+--
+-- Déchargement des données de la table `utilisateur`
+--
+
+INSERT INTO `utilisateur` (`ID_UTILISATEUR`, `CLASSE`, `TYPE`, `NOM`, `PRENOM`, `MAIL`, `MOT_DE_PASSE`, `ROLE`) VALUES
+(1, NULL, 'Administrateur', 'BARBIER', 'Bradley', 'bradley.barbier@outlook.fr', 'Shiro5416', 'admin'),
+(2, NULL, 'Administrateur', 'JOLIOT', 'Julien', 'julien.joliot@outlook.fr', 'Hobbaman5416', 'admin'),
+(3, 'SIO2 SISR', 'Etudiant', 'John', 'Doe', 'john.doe@example.com', 'testMdp', 'user');
+
+--
+-- Contraintes pour les tables déchargées
+--
+
+--
+-- Contraintes pour la table `detient`
+--
+ALTER TABLE `detient`
+  ADD CONSTRAINT `detient_ibfk_1` FOREIGN KEY (`ID_UTILISATEUR`) REFERENCES `utilisateur` (`ID_UTILISATEUR`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Contraintes pour la table `fai`
+--
+ALTER TABLE `fai`
+  ADD CONSTRAINT `fai_ibfk_1` FOREIGN KEY (`ID_UTILISATEUR`) REFERENCES `utilisateur` (`ID_UTILISATEUR`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Contraintes pour la table `ordi_fixe`
+--
+ALTER TABLE `ordi_fixe`
+  ADD CONSTRAINT `ordi_fixe_ibfk_1` FOREIGN KEY (`ID_UTILISATEUR`) REFERENCES `utilisateur` (`ID_UTILISATEUR`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Contraintes pour la table `ordi_portable`
+--
+ALTER TABLE `ordi_portable`
+  ADD CONSTRAINT `ordi_portable_ibfk_1` FOREIGN KEY (`ID_UTILISATEUR`) REFERENCES `utilisateur` (`ID_UTILISATEUR`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Contraintes pour la table `portable`
+--
+ALTER TABLE `portable`
+  ADD CONSTRAINT `portable_ibfk_1` FOREIGN KEY (`ID_UTILISATEUR`) REFERENCES `utilisateur` (`ID_UTILISATEUR`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Contraintes pour la table `tablette`
+--
+ALTER TABLE `tablette`
+  ADD CONSTRAINT `tablette_ibfk_1` FOREIGN KEY (`ID_UTILISATEUR`) REFERENCES `utilisateur` (`ID_UTILISATEUR`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Contraintes pour la table `utilisateur`
+--
+ALTER TABLE `utilisateur`
+  ADD CONSTRAINT `utilisateur_ibfk_1` FOREIGN KEY (`CLASSE`) REFERENCES `classe` (`CLASSE`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
