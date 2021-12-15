@@ -14,7 +14,7 @@ if($_SESSION['role'] === 'visitor'){
 <div class="container pb-4">
 
     <?php if(!isset($_POST['type'])): ?>
-        <h2 class="text-center mb-4">Ajout d'un équipement :</h2>
+        <h2 class="text-center mb-4">Choix de l'équipement :</h2>
         <div class="row d-flex justify-content-center">
             <form class="col-6" action="./add_equipement.php" method="POST">
                 <div class="row">
@@ -22,11 +22,11 @@ if($_SESSION['role'] === 'visitor'){
                         <label class="form-label">Equipement</label>
                         <select name='type' class="form-select" required>
                             <option selected>Choisir...</option>
-                            <option value="telephone">Téléphone</option>
+                            <option value="portable">Téléphone</option>
                             <option value="tablette">Tablette</option>
-                            <option value="laptop">PC Portable</option>
-                            <option value="computer">PC Fixe</option>
-                            <option value="other">Autre</option>
+                            <option value="ordi_portable">PC Portable</option>
+                            <option value="ordi_fixe">PC Fixe</option>
+                            <option value="autre">Autre</option>
                         </select>
                     </div>
                     <div class="col-4 d-flex align-items-end">
@@ -36,10 +36,20 @@ if($_SESSION['role'] === 'visitor'){
             </form>
         </div>
     
+
+
+
+
+
+
+
+
+
+
     <?php else: ?>
         <form method="POST" action="./equipement.php">
 
-        <?php if($_POST['type'] === 'telephone'): ?>
+        <?php if($_POST['type'] === 'portable'): ?>
             <h2 class="text-center mb-4">Ajout d'un équipement : Téléphone</h2>
             <div class="form-group">
                 <label class="mb-2">Modèle du téléphone<span class="input-required">*</span> :</label>
@@ -75,6 +85,15 @@ if($_SESSION['role'] === 'visitor'){
                 <input type="text" name="goData" placeholder="5, 100, 50..." class="form-control" >
             </div>
         <?php endif; ?>
+
+
+
+
+
+
+
+
+
 
         <?php if($_POST['type'] === 'tablette'): ?>
             <h2 class="text-center mb-4">Ajout d'un équipement : Tablette</h2>
@@ -113,15 +132,20 @@ if($_SESSION['role'] === 'visitor'){
             </div>
         <?php endif; ?>
 
-        <?php if($_POST['type'] === 'laptop'): ?>
+
+
+
+
+
+
+
+
+
+        <?php if($_POST['type'] === 'ordi_portable'): ?>
             <h2 class="text-center mb-4">Ajout d'un équipement : PC Portable</h2>
-            <div class="form-group">
-                <label class="mb-2">Modèle du PC Portable<span class="input-required">*</span> :</label>
-                <input type="text" name="modele" placeholder="Lenovo, ASUS, Huawei..." class="form-control" required>
-            </div>
             <div class="form-group mt-3">
                 <label class="mb-2">Ordinateur de la région<span class="input-required">*</span> :</label>
-                <select class="form-select" required>
+                <select name="region" class="form-select" required>
                     <option value="0" selected>Non</option>
                     <option value="1">Oui</option>
                 </select>
@@ -138,7 +162,7 @@ if($_SESSION['role'] === 'visitor'){
             </div>
             <div class="form-group mt-3">
                 <label class="mb-2">Processeur du PC Portable :</label>
-                <input type="text" name="cpu" placeholder="Intel i7-10900, Apple M1 Pro, AMD-5600X..." class="form-control" >
+                <input type="text" name="cpu" placeholder="Intel i7-10900, Apple M1 Pro, AMD Ryzen 5 5600X..." class="form-control" >
             </div>
             <div class="form-group mt-3">
                 <label class="mb-2">Carte graphique du PC Portable :</label>
@@ -154,7 +178,16 @@ if($_SESSION['role'] === 'visitor'){
             </div>
         <?php endif; ?>
 
-        <?php if($_POST['type'] === 'computer'): ?>
+
+
+
+
+
+
+
+
+
+        <?php if($_POST['type'] === 'ordi_fixe'): ?>
             <h2 class="text-center mb-4">Ajout d'un équipement : PC Fixe</h2>
             <div class="form-group">
                 <label class="mb-2">OS du PC Fixe<span class="input-required">*</span> :</label>
@@ -184,9 +217,13 @@ if($_SESSION['role'] === 'visitor'){
             </div>
         <?php endif; ?>
 
+
+
+
+
             <input type='hidden' name="type" value="<?= $_POST['type'] ?>">
             <input type='hidden' name="locate" value="add_equipement.php">
-            <button type="submit" class="btn btn-primary w-100 mt-3">Voir le formulaire</button>
+            <button type="submit" class="btn btn-primary w-100 mt-3">Ajouter l'appareil</button>
         </form>
     <?php endif; ?>
 

@@ -2,13 +2,13 @@
 $icon = null;
 if(isset($type)){
     switch ($type){
-        case 'telephone':
+        case 'portable':
             $icon = 'phone'; break;
         case 'tablette':
             $icon = 'phone-landscape'; break;
-        case 'laptop':
+        case 'ordi_portable':
             $icon = 'laptop'; break;
-        case 'computer':
+        case 'ordi_fixe':
             $icon = 'pc-display'; break;
         default:
             $icon = 'question'; break;
@@ -40,7 +40,7 @@ if(isset($type)){
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-            <?php if($type === 'telephone'): ?>
+            <?php if($type === 'portable'): ?>
                 <form method="POST" action="./">
                     <div class="form-group">
                         <label class="mb-2">Modèle du téléphone<span class="input-required">*</span> :</label>
@@ -116,7 +116,7 @@ if(isset($type)){
                 </form>
             <?php endif; ?>
 
-            <?php if($type === 'laptop'): ?>
+            <?php if($type === 'ordi_portable'): ?>
                 <form method="POST" action="./">
                     <div class="form-group">
                         <label class="mb-2">Modèle du PC Portable<span class="input-required">*</span> :</label>
@@ -158,7 +158,7 @@ if(isset($type)){
                 </form>
             <?php endif; ?>
 
-            <?php if($type === 'computer'): ?>
+            <?php if($type === 'ordi_fixe'): ?>
                 <form method="POST" action="./">
                     <div class="form-group">
                         <label class="mb-2">OS du PC Fixe<span class="input-required">*</span> :</label>
