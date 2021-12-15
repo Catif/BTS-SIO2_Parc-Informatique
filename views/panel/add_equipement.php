@@ -154,8 +154,8 @@ if($_SESSION['role'] === 'visitor'){
                 <label class="mb-2">OS du PC Portable<span class="input-required">*</span> :</label>
                 <select name="os" class="form-select" required>
                     <option selected>Choisir...</option>
-                    <option value="Android">Mac</option>
-                    <option value="iOS">Windows</option>
+                    <option value="Mac">Mac</option>
+                    <option value="Windows">Windows</option>
                     <option value="Linux">Linux</option>
                     <option value="Autre">Autre</option>
                 </select>
@@ -193,8 +193,8 @@ if($_SESSION['role'] === 'visitor'){
                 <label class="mb-2">OS du PC Fixe<span class="input-required">*</span> :</label>
                 <select name="os" class="form-select" required>
                     <option selected>Choisir...</option>
-                    <option value="Android">Mac</option>
-                    <option value="iOS">Windows</option>
+                    <option value="Mac">Mac</option>
+                    <option value="Windows">Windows</option>
                     <option value="Linux">Linux</option>
                     <option value="Autre">Autre</option>
                 </select>

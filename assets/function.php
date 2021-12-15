@@ -1,5 +1,6 @@
 <?php
 
-function create_box(string $title, string $type, int $id){
+function create_box(array $equipement, string $type, int $id){
+    $id++;
     require __DIR__ . '/components/box.php';
 }
