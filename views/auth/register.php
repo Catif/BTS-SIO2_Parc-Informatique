@@ -2,8 +2,8 @@
 
 $title = 'S\'enregistrer';
 
-require '../assets/components/header.php';
-require '../assets/components/navbar.php';
+require dirname(__DIR__ , 2) . '/assets/components/header.php';
+require dirname(__DIR__ , 2) . '/assets/components/navbar.php';
 ?>
 
 <section class="container pb-4 mb-5">
@@ -15,12 +15,12 @@ require '../assets/components/navbar.php';
                 <label for="" class="mb-2">Prénom</label>
                 <input type="text" name="prenom" placeholder="Prénom" class="form-control" required>
             </div>
-            <div class="w-50 form-group">
+            <div class="w-50 form-group mt-3">
                 <label for="" class="mb-2">Nom</label>
                 <input type="text" name="nom" placeholder="Nom" class="form-control" required>
             </div>
-            <div class="w-50 form-group">
-                <label for="" class="mb-2 mt-3">E-Mail</label>
+            <div class="w-50 form-group mt-3">
+                <label for="" class="mb-2 ">E-Mail</label>
                 <input type="email" name="email" placeholder="Courrier électronique" class="form-control" required>
             </div>
             <div class="w-50 form-group mt-3">
@@ -37,7 +37,9 @@ require '../assets/components/navbar.php';
             <label class="w-50 form-group mt-3" for="">Classe</label>
               <select class="form-select w-50" select>
                 <option selected>Choisir...</option>
-                <option value="1">SIO</option>
+                <option value="1">SIO SLAM</option>
+                <option value="2">SIO SISR</option>
+                <option value="3">MCO</option>
               </select>
             <div class="form-group mt-3">
               <div class="form-check">
@@ -54,6 +56,6 @@ require '../assets/components/navbar.php';
 
 <?php 
 
-require '../assets/components/header.php';
+require dirname(__DIR__ , 2) . '/assets/components/header.php';
 
 ?>

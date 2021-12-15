@@ -2,8 +2,8 @@
 
 $title = 'Connexion';
 
-require '../assets/components/header.php';
-require '../assets/components/navbar.php';
+require dirname(__DIR__ , 2) . '/assets/components/header.php';
+require dirname(__DIR__ , 2) . '/assets/components/navbar.php';
 ?>
 
 <section class="container">
@@ -25,7 +25,7 @@ require '../assets/components/navbar.php';
                 
             </div>
             <p>
-                <a class="form-text" href="<?= BASE_URL . '/forget_password.php' ?>">Mot de passe oublié ?</a>
+                <a class="form-text" href="<?= BASE_URL . '/views/auth/forget_password.php' ?>">Mot de passe oublié ?</a>
             </p>
 
             <button type="submit" class="btn btn-primary w-50 mt-2">Connexion</button>
@@ -35,6 +35,6 @@ require '../assets/components/navbar.php';
 
 <?php 
 
-require '../assets/components/footer.php';
+require dirname(__DIR__ , 2) . '/assets/components/footer.php';
 
 ?>

@@ -10,8 +10,8 @@
             <a href="<?= BASE_URL .'/views/contact.php' ?>" class="nav-link">Nous contacter</a>
         </div>
         <div class="navbar-nav ml-auto">
-            <a href='<?= BASE_URL .'/views/login.php' ?>' class="btn btn-primary mx-2">Connexion</a>
-            <a href='<?= BASE_URL .'/views/register.php' ?>' class="btn btn-light mx-2">Enregistement</a>
+            <a href='<?= BASE_URL .'/views/auth/login.php' ?>' class="btn btn-primary mx-2">Connexion</a>
+            <a href='<?= BASE_URL .'/views/auth/register.php' ?>' class="btn btn-light mx-2">Enregistement</a>
         </div>
     </div>
 </nav>
