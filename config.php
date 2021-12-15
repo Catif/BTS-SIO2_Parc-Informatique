@@ -2,11 +2,13 @@
 // Chargement de la session
 if( session_status() == PHP_SESSION_NONE ){
     session_start();
-    $_SESSION['role'] = 'visitor';
+    if(!isset($_SESSION['role'])){
+        $_SESSION['role'] = 'visitor';
+    }
 }
 
 // Définir le chemin de l'application
-define("BASE_URL", "http://localhost:8000");
+define("BASE_URL", "http://localhost:3000");
 define("SITE_ROOT", __DIR__);
 
 // Initialisation de la base de donnée

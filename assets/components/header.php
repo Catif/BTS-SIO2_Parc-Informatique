@@ -5,7 +5,6 @@ if(isset($title)){
     $title = "Parc Informatique - G1";
 }
 ?>
-
 <!DOCTYPE html>
 <html lang="fr">
     <head>
