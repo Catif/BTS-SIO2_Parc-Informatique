@@ -222,7 +222,7 @@ if($_SESSION['role'] === 'visitor'){
 
 
             <input type='hidden' name="type" value="<?= $_POST['type'] ?>">
-            <input type='hidden' name="locate" value="add_equipement.php">
+            <input type='hidden' name="action" value="add_equipement">
             <button type="submit" class="btn btn-primary w-100 mt-3">Ajouter l'appareil</button>
         </form>
     <?php endif; ?>

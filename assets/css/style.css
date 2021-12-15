@@ -5,6 +5,7 @@
     --color-font: #15092A;
 
     --color-bg-box: #2B1155;
+    --color-bg-box-ext: #000;
     --color-bg-box-icon: #F9F7FD;
 
     --color-bg-container: #f6f2fc; /* f6f2fc */
@@ -62,6 +63,10 @@ body{
 
 .card{
     padding: 0;
+}
+
+.card.card-ext .card-img-top{
+    background-color: var(--color-bg-box-ext);
 }
 
 .card .card-img-top{
