@@ -60,6 +60,9 @@ body{
 }
 
 
+.card{
+    padding: 0;
+}
 
 .card .card-img-top{
     background-color: var(--color-bg-box);
@@ -72,6 +75,11 @@ body{
 
 .card .card-body .card-title{
     font-size: 16px;
+}
+
+a.card{
+    color: #000;
+    text-decoration: none;
 }
 
 .input-required{
