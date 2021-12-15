@@ -47,7 +47,7 @@ if($_SESSION['role'] === 'visitor'){
             </div>
             <div class="form-group mt-3">
                 <label class="mb-2">OS du téléphone<span class="input-required">*</span> :</label>
-                <select class="form-select" required>
+                <select name="os" class="form-select" required>
                     <option selected>Choisir...</option>
                     <option value="Android">Android</option>
                     <option value="iOS">iOS</option>
@@ -84,7 +84,7 @@ if($_SESSION['role'] === 'visitor'){
             </div>
             <div class="form-group mt-3">
                 <label class="mb-2">OS de la tablette<span class="input-required">*</span> :</label>
-                <select class="form-select" required>
+                <select name="os" class="form-select" required>
                     <option selected>Choisir...</option>
                     <option value="Android">Android</option>
                     <option value="iOS">iOS</option>
@@ -128,7 +128,7 @@ if($_SESSION['role'] === 'visitor'){
             </div>
             <div class="form-group mt-3">
                 <label class="mb-2">OS du PC Portable<span class="input-required">*</span> :</label>
-                <select class="form-select" required>
+                <select name="os" class="form-select" required>
                     <option selected>Choisir...</option>
                     <option value="Android">Mac</option>
                     <option value="iOS">Windows</option>

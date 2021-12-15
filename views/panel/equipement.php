@@ -14,12 +14,13 @@ if($_SESSION['role'] === 'visitor'){
     die();
 }
 
+var_dump($_SESSION);
 if(isset($_POST['locate']) and $_POST['locate'] === 'add_equipement.php'){
     var_dump($_POST);
     if($_POST['type'] = 'telephone'){
         $sql = $db->query("INSERT INTO portable (ID_UTILISATEUR, MODELE, OS, PROCESSEUR, RAM, STOCKAGE, FAI, DATA_GO) 
-        VALUES (':id_utilisateur', ':modele', ':os', ':processeur', ':ram', ':stockage', ':fai', ':data_go')",[
-            ':id_utilisateur' => $_POST['id_utilisateur'],
+        VALUES (:id_utilisateur, :modele, :os, :processeur, :ram, :stockage, :fai, :data_go)",[
+            ':id_utilisateur' => $_SESSION['id_utilisateur'],
             ':modele' => $_POST['modele'],
             ':os' => $_POST['os'],
             ':processeur' => $_POST['cpu'],
