@@ -158,7 +158,7 @@ if($_SESSION['role'] === 'visitor'){
             <h2 class="text-center mb-4">Ajout d'un équipement : PC Fixe</h2>
             <div class="form-group">
                 <label class="mb-2">OS du PC Fixe<span class="input-required">*</span> :</label>
-                <select class="form-select" required>
+                <select name="os" class="form-select" required>
                     <option selected>Choisir...</option>
                     <option value="Android">Mac</option>
                     <option value="iOS">Windows</option>
@@ -184,7 +184,7 @@ if($_SESSION['role'] === 'visitor'){
             </div>
         <?php endif; ?>
 
-            <input type='hidden' name="type" value="<?= $type ?>">
+            <input type='hidden' name="type" value="<?= $_POST['type'] ?>">
             <input type='hidden' name="locate" value="add_equipement.php">
             <button type="submit" class="btn btn-primary w-100 mt-3">Voir le formulaire</button>
         </form>

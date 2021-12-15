@@ -9,26 +9,26 @@ if($_SESSION['role'] === 'user'){
 require dirname(__DIR__ , 2) . '/assets/components/header.php';
 
 
-var_dump($db);
-$sql = $db->query("SELECT * FROM utilisateur;");
-var_dump($sql->fetchAll());
-
-
-
-
-
-
-
-
-
-
 if($_SESSION['role'] === 'visitor'){
     header('Location: '. BASE_URL . '/');
     die();
 }
 
 if(isset($_POST['locate']) and $_POST['locate'] === 'add_equipement.php'){
-    
+    var_dump($_POST);
+    if($_POST['type'] = 'telephone'){
+        $sql = $db->query("INSERT INTO portable (ID_UTILISATEUR, MODELE, OS, PROCESSEUR, RAM, STOCKAGE, FAI, DATA_GO) 
+        VALUES (':id_utilisateur', ':modele', ':os', ':processeur', ':ram', ':stockage', ':fai', ':data_go')",[
+            ':id_utilisateur' => $_POST['id_utilisateur'],
+            ':modele' => $_POST['modele'],
+            ':os' => $_POST['os'],
+            ':processeur' => $_POST['cpu'],
+            ':ram' => $_POST['goRAM'],
+            ':stockage' => $_POST['goStockage'],
+            ':fai' => $_POST['FAI'],
+            ':data_go' => $_POST['goData'],
+        ]);
+    }
 }
 ?>
 
