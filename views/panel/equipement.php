@@ -95,7 +95,7 @@ if(isset($_POST['action']) and $_POST['action'] === 'add_equipement'){
 ====================================================================== */
 if(isset($_POST['action']) and $_POST['action'] === 'detient'){
     $sql = $db->query('UPDATE detient SET MICROPHONE = :microphone, CAMERA = :camera, FAI = :fai', [
-        ':microphone' => (int)$_POST['microphone'],
+        ':microphone' => (int)$_POST['mic'],
         ':camera' => (int)$_POST['camera'],
         ':fai' => (int)$_POST['fai']
     ]);

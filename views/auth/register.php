@@ -57,6 +57,6 @@ require dirname(__DIR__ , 2) . '/assets/components/header.php';
 
 <?php 
 
-require dirname(__DIR__ , 2) . '/assets/components/header.php';
+require dirname(__DIR__ , 2) . '/assets/components/footer.php';
 
 ?>
