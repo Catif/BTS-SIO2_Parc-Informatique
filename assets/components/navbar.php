@@ -6,12 +6,12 @@
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <div class="navbar-nav mx-auto text-center">
-            <a href="/" class="nav-link active">Accueil</a>
-            <a href="/views/contact.php" class="nav-link">Nous contacter</a>
+            <a href="<?= BASE_URL .'/' ?>" class="nav-link active">Accueil</a>
+            <a href="<?= BASE_URL .'/views/contact.php' ?>" class="nav-link">Nous contacter</a>
         </div>
         <div class="navbar-nav ml-auto">
-            <a href='/views/login.php' class="btn btn-primary mx-2">Connexion</a>
-            <a href='/views/register.php' class="btn btn-light mx-2">Enregistement</a>
+            <a href='<?= BASE_URL .'/views/login.php' ?>' class="btn btn-primary mx-2">Connexion</a>
+            <a href='<?= BASE_URL .'/views/register.php' ?>' class="btn btn-light mx-2">Enregistement</a>
         </div>
     </div>
 </nav>

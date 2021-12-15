@@ -20,6 +20,7 @@ body{
 .navbar-light .navbar-brand{
     color: var(--color-font-header);
     hyphens: auto;
+    margin: 0px;
 }
 .navbar-light .navbar-nav .nav-link{
     color: var(--color-font-header);
