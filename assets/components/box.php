@@ -18,7 +18,7 @@ if(isset($type)){
 
 <?php if($type !== null): ?>
     <div class="col">
-        <div class="d-flex justify-content-center h-100">
+        <div class="d-flex justify-content-center w-100 h-100">
             <button class="card" data-bs-toggle="modal" data-bs-target="#modals-<?= $type . '-' . $id ?>">
                 <div class="card-img-top">
                     <i class="bi bi-<?= $icon ?>"></i>
