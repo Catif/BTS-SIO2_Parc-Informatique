@@ -37,10 +37,19 @@ if(isset($_GET['action'])){
             }
         }
 
-        $query = $db->query("SELECT * FROM utilisateur WHERE utilisateur.type = :type",[
-            ':type' => $_GET['recherche_type']
-        ]);
-        $results = $query->fetchAll();
+        if(!isset($_POST['search'])){
+            $query = $db->query("SELECT * FROM utilisateur WHERE utilisateur.type = :type LIMIT 30",[
+                ':type' => $_GET['recherche_type']
+            ]);
+            $results = $query->fetchAll();
+        }else{
+            $_POST['search'] = '%'. $_POST['search'] . '%';
+            $query = $db->query("SELECT * FROM utilisateur WHERE utilisateur.type = :type AND (utilisateur.nom LIKE :search  OR utilisateur.prenom LIKE :search ) LIMIT 30",[
+                ':type' => $_GET['recherche_type'],
+                ':search' => $_POST['search'],
+            ]);
+            $results = $query->fetchAll();
+        }
     } elseif($_GET['action'] === 'classes' || $_GET['action'] === 'compte'){
         $query = $db->query("SELECT * FROM classe",[]);
         $results = $query->fetchAll();
@@ -60,7 +69,7 @@ if(isset($_GET['action'])){
         $query = $db->query("INSERT INTO utilisateur (classe, type, nom, prenom, mail, mot_de_passe, role) 
         VALUES (:classe, :type, :nom, :prenom, :mail, :mot_de_passe, :role)",
         [
-          ':classe' => isset($_POST['select']) ? $_POST['select'] : null,
+          ':classe' => isset($_POST['classe']) ? $_POST['classe'] : null,
           ':type' => $_POST['role'],
           ':nom' => strtoupper($_POST['nom']),
           ':prenom' => ucfirst(strtolower($_POST['prenom'])),
@@ -95,6 +104,21 @@ echo('</pre>');
                                     <div class="col-4">
                                         <button class="btn btn-primary w-100" type="submit">Créer la classe</button>
                                         <input type="hidden" name="option" value="create-classe">
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    <?php endif; ?>
+                    <?php if($_GET['action'] === 'utilisateur'): ?>
+                        <div class="form-group">
+                            <form action="" method="post">
+                                <label class="mt-3">Recherche :</label>
+                                <div class="row">
+                                    <div class="col-8">
+                                        <input type="text" name="search" class="form-control" placeholder="Nom ou prénom de la personne" autocomplete="off" required>
+                                    </div>
+                                    <div class="col-4">
+                                        <button class="btn btn-primary w-100" type="submit">Faire une recherche</button>
                                     </div>
                                 </div>
                             </form>

@@ -1,5 +1,6 @@
 <?php 
 session_start();
+require dirname(__DIR__ , 2) . '/config.php';
 if($_SESSION['role'] !== 'visitor'){
     if($_SESSION['role'] === 'reader'){
         header('Location: '. BASE_URL . '/views/panel/admin.php');
@@ -16,23 +17,27 @@ require dirname(__DIR__ , 2) . '/assets/components/header.php';
 $erreur = null;
 
 if(isset($_POST['email'], $_POST['password'])) {
-    $query = $db->query('SELECT id_utilisateur, utilisateur.role, mot_de_passe FROM utilisateur WHERE mail = :mail', [
+    $query = $db->query('SELECT id_utilisateur, utilisateur.role, utilisateur.type, mot_de_passe FROM utilisateur WHERE mail = :mail', [
         ':mail' => $_POST['email'],
     ]);
     $user = $query->fetch();
-    
 
-    if(password_verify($_POST['password'], $user['mot_de_passe'])){
-        $_SESSION['role'] = $user['role'];
-        $_SESSION['id_utilisateur'] = $user['id_utilisateur'];
-        if($user['role'] === 'user'){
-            header('Location:'. BASE_URL .'/views/panel/equipement.php');
-            exit();
-        } else{
-            header('Location:'. BASE_URL .'/views/panel/admin.php');
+    if($user === false){
+        $erreur = 'Identifiant incorrect';
+    } else{
+        if(password_verify($_POST['password'], $user['mot_de_passe'])){
+            $_SESSION['role'] = $user['role'];
+            $_SESSION['id_utilisateur'] = $user['id_utilisateur'];
+            $_SESSION['id_utilisateur'] = $user['type'];
+            if($user['role'] === 'user'){
+                header('Location:'. BASE_URL .'/views/panel/equipement.php');
+                exit();
+            } else{
+                header('Location:'. BASE_URL .'/views/panel/admin.php');
+            }
+        } else {
+            $erreur = "Identifiant ou mot de passe incorrect";
         }
-    } else {
-        $erreur = "Identifiant ou mot de passe incorrect";
     }
 }
 ?>
