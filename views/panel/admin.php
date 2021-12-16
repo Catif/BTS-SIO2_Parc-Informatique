@@ -35,9 +35,9 @@ foreach($list_equipement as $equipement){
     <div class="d-flex justify-content-center">
         <div class="col-6 mb-5">
             <form action="./admin_bis.php">
-                <p>Vous pouvez sélectionner un type de rang qui permettra de modifier ou de consulter les données profil d'un étudiant.</p>
+                <p class='text-center'>Vous pouvez sélectionner un type de rang qui permettra de modifier ou de consulter les données profil d'un étudiant.</p>
                 <div class="row d-flex justify-content-center">
-                    <div class="col-10 row">
+                    <div class="col-12 row">
                         <label>Choisir un rang :</label>
                         <div class="col-8">
                             <select name="recherche_type" class="form-select" required>

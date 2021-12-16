@@ -1,5 +1,13 @@
 <?php 
-
+session_start();
+if($_SESSION['role'] !== 'visitor'){
+    if($_SESSION['role'] === 'reader'){
+        header('Location: '. BASE_URL . '/views/panel/admin.php');
+    } else{
+        header('Location: '. BASE_URL . '/views/panel/equipement.php');
+    }
+    die();
+}
 
 $title = 'Connexion';
 

@@ -1,4 +1,15 @@
 <?php
+session_start();
+require_once __DIR__ . '/config.php';
+if($_SESSION['role'] !== 'visitor'){
+    if($_SESSION['role'] === 'reader'){
+        header('Location: '. BASE_URL . '/views/panel/admin.php');
+    } else{
+        header('Location: '. BASE_URL . '/views/panel/equipement.php');
+    }
+    die();
+}
+
 $title = 'Accueil - Parc Informatique';
 
 require __DIR__ . '/assets/components/header.php';
