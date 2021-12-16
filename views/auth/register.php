@@ -30,6 +30,12 @@ if(isset($_POST['password'])){
         ':mot_de_passe' => password_hash($_POST['password'], PASSWORD_DEFAULT)
       ]);
     }
+
+    $query = $db->query("INSERT INTO detient (ID_UTILISATEUR, FAI, CAMERA, MICROPHONE) VALUES (:ID_UTILISATEUR, 0, 0, 0)",
+    [
+      ':ID_UTILISATEUR' => $db->returnLastInsertId()
+    ]);
+
     $_SESSION['role'] = 'user';
     $_SESSION['id_utilisateur'] = $db->returnLastInsertId();
     header('location:' . BASE_URL . '/views/panel/equipement.php');
@@ -76,9 +82,9 @@ if(isset($_POST['password'])){
                   <input type="password" name="confirmpassword" placeholder="Confirmer son mot de passe..." class="form-control" required>
               </div>
               <label class="form-group mt-3" for="">Classe</label>
-                <select class="form-select" name="select"?>" select>
-                  <?php foreach($classes as $classe): ?>
-                 <option value="<?= $classe['CLASSE'] ?>"><?= $classe['CLASSE'] ?></option>
+                <select class="form-select" name="select" select>
+                <?php foreach($classes as $classe): ?>
+                  <option value="<?= $classe['CLASSE'] ?>"><?= $classe['CLASSE'] ?></option>
                 <?php endforeach; ?>
                 </select>
               <div class="form-group mt-3">
