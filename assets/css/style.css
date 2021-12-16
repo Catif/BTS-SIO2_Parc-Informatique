@@ -96,3 +96,7 @@ a.card{
     background-color: hsl(261, 68%, 92%);
     border-radius: 5px;
 }
+
+i.bi.bi-trash-fill{
+    color: red;
+}
