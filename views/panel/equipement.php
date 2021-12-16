@@ -5,13 +5,13 @@ $success = null;
 $error = null;
 $id = null;
 
-require dirname(__DIR__ , 2) . '/assets/components/header.php';
-
-
-if($_SESSION['role'] === 'visitor'){
+require_once dirname(__DIR__,2) . '/config.php';
+if($_SESSION['role'] === 'visitor' || (($_SESSION['role'] === 'admin' || $_SESSION['role'] === 'reader') && !isset($_GET))){
     header('Location: '. BASE_URL . '/');
     die();
 }
+
+require dirname(__DIR__ , 2) . '/assets/components/header.php';
 
 if(isset($_GET['id']) && ($_SESSION['role'] === 'admin' || $_SESSION['role'] === 'reader')){
     $_SESSION['id_utilisateur_admin'] = $_GET['id'];

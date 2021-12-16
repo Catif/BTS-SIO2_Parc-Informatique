@@ -4,6 +4,7 @@ $title = null;
 $success = null;
 $error = null;
 
+require_once dirname(__DIR__,2) . '/config.php';
 if($_SESSION['role'] === 'visitor'){
     header('Location: '. BASE_URL . '/');
     die();
