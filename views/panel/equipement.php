@@ -1,6 +1,8 @@
 <?php 
 session_start();
-$title = '';
+$title = null;
+$success = null;
+$error = null;
 if($_SESSION['role'] === 'user'){
     $title = 'Mes équipement';
 } else {
@@ -36,10 +38,10 @@ if(isset($_POST['action']) and $_POST['action'] === 'add_equipement'){
             ':modele' => isset($_POST['modele']) ? $_POST['modele'] : null,
             ':os' => isset($_POST['os']) ? $_POST['os'] : null,
             ':processeur' => isset($_POST['cpu']) ? $_POST['cpu'] : null,
-            ':ram' => (int)isset($_POST['goRAM']) ? $_POST['goRAM'] : null,
-            ':stockage' => (int)isset($_POST['goStockage']) ? $_POST['goStockage'] : null,
+            ':ram' => isset($_POST['goRAM']) ? (int)$_POST['goRAM'] : null,
+            ':stockage' => isset($_POST['goStockage']) ? (int)$_POST['goStockage'] : null,
             ':fai' => isset($_POST['FAI']) ? $_POST['FAI'] : null,
-            ':data_go' => (float)isset($_POST['goData']) ? $_POST['goData'] : null,
+            ':data_go' => isset($_POST['goData']) ? (float)$_POST['goData'] : null,
         ]);
     }
 
@@ -50,10 +52,10 @@ if(isset($_POST['action']) and $_POST['action'] === 'add_equipement'){
             ':modele' => isset($_POST['modele']) ? $_POST['modele'] : null,
             ':os' => isset($_POST['os']) ? $_POST['os'] : null,
             ':processeur' => isset($_POST['cpu']) ? $_POST['cpu'] : null,
-            ':ram' => (int)isset($_POST['goRAM']) ? $_POST['goRAM'] : null,
-            ':stockage' => (int)isset($_POST['goStockage']) ? $_POST['goStockage'] : null,
+            ':ram' => isset($_POST['goRAM']) ? (int)$_POST['goRAM'] : null,
+            ':stockage' => isset($_POST['goStockage']) ? (int)$_POST['goStockage'] : null,
             ':fai' => isset($_POST['FAI']) ? $_POST['FAI'] : null,
-            ':data_go' => (float)isset($_POST['goData']) ? $_POST['goData'] : null,
+            ':data_go' => isset($_POST['goData']) ? (float)$_POST['goData'] : null,
         ]);
     }
 
@@ -65,8 +67,8 @@ if(isset($_POST['action']) and $_POST['action'] === 'add_equipement'){
             ':os' => isset($_POST['os']) ? $_POST['os'] : null,
             ':processeur' => isset($_POST['cpu']) ? $_POST['cpu'] : null,
             ':carte_graphique' => isset($_POST['gpu']) ? $_POST['gpu'] : null,
-            ':ram' => (int)isset($_POST['goRAM']) ? $_POST['goRAM'] : null,
-            ':stockage' => (int)isset($_POST['goStockage']) ? $_POST['goStockage'] : null
+            ':ram' => isset($_POST['goRAM']) ? (int)$_POST['goRAM'] : null,
+            ':stockage' => isset($_POST['goStockage']) ? (int)$_POST['goStockage'] : null
         ]);
     }
 
@@ -77,8 +79,8 @@ if(isset($_POST['action']) and $_POST['action'] === 'add_equipement'){
             ':os' => isset($_POST['os']) ? $_POST['os'] : null,
             ':processeur' => isset($_POST['cpu']) ? $_POST['cpu'] : null,
             ':carte_graphique' => isset($_POST['gpu']) ? $_POST['gpu'] : null,
-            ':ram' => (int)isset($_POST['goRAM']) ? $_POST['goRAM'] : null,
-            ':stockage' => (int)isset($_POST['goStockage']) ? $_POST['goStockage'] : null
+            ':ram' => isset($_POST['goRAM']) ? (int)$_POST['goRAM'] : null,
+            ':stockage' => isset($_POST['goStockage']) ? (int)$_POST['goStockage'] : null
         ]);
     }
 }
@@ -91,7 +93,7 @@ if(isset($_POST['action']) and $_POST['action'] === 'add_equipement'){
 
 
 /* ======================================================================
-                        Mise à jour élément détient
+        Mise à jour des éléments en fonction de $_POST['action']
 ====================================================================== */
 if(isset($_POST['action']) and $_POST['action'] === 'detient'){
     $sql = $db->query('UPDATE detient SET MICROPHONE = :microphone, CAMERA = :camera, FAI = :fai', [
@@ -99,6 +101,67 @@ if(isset($_POST['action']) and $_POST['action'] === 'detient'){
         ':camera' => (int)$_POST['camera'],
         ':fai' => (int)$_POST['fai']
     ]);
+    $success = 'Vos informations ont bien été mis à jour.';
+}
+
+
+if(isset($_POST['action']) and $_POST['action'] === 'delete'){
+    try{
+        $sql = $db->query("DELETE FROM ". $_POST['type'] ." WHERE ID = :id", [
+            ':id' => (int)$_POST['id']
+        ]);
+        $success = 'Votre équipement a bien été supprimé.';
+    } catch(PDOException $e){
+        $error = "Requête pour la suppression de l'équipement a échoué.<br>Contactez nos administrateurs si cela ne fonctionne pas après plusieurs essais.";
+    }
+}
+
+
+if(isset($_POST['action']) and $_POST['action'] === 'edit'){
+    if($_POST['type'] === 'portable'){
+        $sql = $db->query("UPDATE portable SET MODELE = :modele, OS = :os, PROCESSEUR = :processeur, RAM = :ram, STOCKAGE = :stockage, FAI = :fai, DATA_GO = :data_go",[
+            ':modele' => isset($_POST['modele']) ? $_POST['modele'] : null,
+            ':os' => isset($_POST['os']) ? $_POST['os'] : null,
+            ':processeur' => isset($_POST['cpu']) ? $_POST['cpu'] : null,
+            ':ram' => isset($_POST['goRAM']) ? (int)$_POST['goRAM'] : null,
+            ':stockage' => isset($_POST['goStockage']) ? (int)$_POST['goStockage'] : null,
+            ':fai' => isset($_POST['FAI']) ? $_POST['FAI'] : null,
+            ':data_go' => isset($_POST['goData']) ? (float)$_POST['goData'] : null,
+        ]);
+    }
+
+    if($_POST['type'] ==='tablette'){
+        $sql = $db->query("UPDATE tablette SET MODELE = :modele, OS = :os, PROCESSEUR = :processeur, RAM = :ram, STOCKAGE = :stockage, FAI = :fai, DATA_GO = :data_go",[
+            ':modele' => isset($_POST['modele']) ? $_POST['modele'] : null,
+            ':os' => isset($_POST['os']) ? $_POST['os'] : null,
+            ':processeur' => isset($_POST['cpu']) ? $_POST['cpu'] : null,
+            ':ram' => isset($_POST['goRAM']) ? (int)$_POST['goRAM'] : null,
+            ':stockage' => isset($_POST['goStockage']) ? (int)$_POST['goStockage'] : null,
+            ':fai' => isset($_POST['FAI']) ? $_POST['FAI'] : null,
+            ':data_go' => isset($_POST['goData']) ? (float)$_POST['goData'] : null,
+        ]);
+    }
+
+    if($_POST['type'] === 'ordi_portable'){
+        $sql = $db->query("UPDATE ordi_portable SET REGION = :region, OS = :os, PROCESSEUR = :processeur, CARTE_GRAPHIQUE = :carte_graphique, RAM = :ram, STOCKAGE = :stockage",[
+            ':region' => isset($_POST['region']) ? $_POST['region'] : 0,
+            ':os' => isset($_POST['os']) ? $_POST['os'] : null,
+            ':processeur' => isset($_POST['cpu']) ? $_POST['cpu'] : null,
+            ':carte_graphique' => isset($_POST['gpu']) ? $_POST['gpu'] : null,
+            ':ram' => isset($_POST['goRAM']) ? (int)$_POST['goRAM'] : null,
+            ':stockage' => isset($_POST['goStockage']) ? (int)$_POST['goStockage'] : null
+        ]);
+    }
+
+    if($_POST['type'] === 'ordi_fixe'){
+        $sql = $db->query("UPDATE ordi_fixe SET OS = :os, PROCESSEUR = :processeur, CARTE_GRAPHIQUE = :carte_graphique, RAM = :ram, STOCKAGE = :stockage",[
+            ':os' => isset($_POST['os']) ? $_POST['os'] : null,
+            ':processeur' => isset($_POST['cpu']) ? $_POST['cpu'] : null,
+            ':carte_graphique' => isset($_POST['gpu']) ? $_POST['gpu'] : null,
+            ':ram' => isset($_POST['goRAM']) ? (int)$_POST['goRAM'] : null,
+            ':stockage' => isset($_POST['goStockage']) ? (int)$_POST['goStockage'] : null
+        ]);
+    }
 }
 
 
@@ -143,17 +206,27 @@ $detient = $query->fetch();
 
 ?>
 
-<!-- 
-<?php
+
+<!-- <?php
 echo('<pre>');
-var_dump($classes);
+var_dump($_POST);
 echo('</pre>');
 ?> -->
 
 <div class="container pb-4">
     <h2 class="text-center mb-4"><?= $title ?></h2>
-
     
+    <?php if($success !== null): ?>
+        <div class="alert alert-success text-center">
+            <?= $success ?>
+        </div>
+    <?php endif; ?>
+    <?php if($error !== null): ?>
+        <div class="alert alert-danger text-center">
+            <?= $error ?>
+        </div>
+    <?php endif; ?>
+
     <?php
     // var_dump($equipements_user); 
     if($equipements_user !== null): ?>

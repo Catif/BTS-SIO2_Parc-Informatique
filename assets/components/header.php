@@ -1,7 +1,7 @@
 <?php
 require_once dirname(__DIR__,2) . '/config.php';
 
-if(isset($title)){
+if(!isset($title)){
     $title = "Parc Informatique - G1";
 }
 ?>

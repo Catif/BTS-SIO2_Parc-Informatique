@@ -3,7 +3,6 @@
 $title = "Nous contacter";
 
 require '../assets/components/header.php';
-require '../assets/components/navbar.php';
 ?>
 
 <section class="container pb-3">
