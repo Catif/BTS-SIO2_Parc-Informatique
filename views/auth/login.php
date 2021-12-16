@@ -12,7 +12,9 @@ if(isset($_POST['email'], $_POST['password'])) {
         ':mail' => $_POST['email']
     ]);
     $user = $query->fetch();
-    if(password_verify($_POST['password'],$user['mot_de_passe'])){
+    $hashed = password_hash($_POST['password'], PASSWORD_DEFAULT);
+
+    if(password_verify($_POST['password'], $hashed)){
         $_SESSION['role'] = $user['role'];
         $_SESSION['id_utilisateur'] = $user['id_utilisateur'];
         if($user['role'] === 'user'){

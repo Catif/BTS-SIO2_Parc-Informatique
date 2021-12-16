@@ -2,8 +2,7 @@
 
 $title = "Nous contacter";
 
-require '../assets/components/header.php';
-require '../assets/components/navbar.php';
+require '../assets/components/header.php'; 
 ?>
 
 <section class="container pb-3">
@@ -11,7 +10,7 @@ require '../assets/components/navbar.php';
         <div>
         <h2 class="text-center">Connexion</h2>
         <p>Veuillez rentrer vos informations pour accéder au site</p>
-        <form method="POST" action="./">
+        <form method="POST" action="./contact.php">
             <div class="mb-3 form-group">
                 <label for="" class="mb-2">Adresse électronique</label>
                 <input type="email" name="email" placeholder="Entrez votre adresse mail" class="form-control" required>

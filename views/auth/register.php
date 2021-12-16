@@ -7,15 +7,21 @@ require dirname(__DIR__ , 2) . '/assets/components/header.php';
 $query = $db->query("SELECT * FROM classe", []);
 $classes = $query->fetchAll();
 
-if(isset($_POST['prenom'], $_POST['nom'], $_POST['email'], $_POST['password'], $_POST['select'])){
+$different_password = null;
+
+if(isset($_POST['password']) == isset($_POST['confirmpassword'])){
+  if(isset($_POST['prenom'], $_POST['nom'], $_POST['email'], $_POST['password'], $_POST['select'])){
     $query = $db->query("INSERT INTO utilisateur (classe, type, nom, prenom, mail, mot_de_passe, role) VALUES (:classe, 'Etudiant', :nom, :prenom, :mail, :mot_de_passe, 'user')",
     [
       ':classe' => $_POST['select'],
-      ':nom' => $_POST['nom'],
-      ':prenom' => $_POST['prenom'],
+      ':nom' => strtoupper($_POST['nom']),
+      ':prenom' => ucfirst(strtolower($_POST['prenom'])),
       ':mail' => $_POST['email'],
-      ':mot_de_passe' => $_POST['password']
-    ]);
+      ':mot_de_passe' => password_hash($_POST['password'], PASSWORD_DEFAULT)
+    ]); 
+  }
+} else {
+    $different_password = 'Les mots de passes ne correspondent pas !';
 }
 
 ?>
@@ -23,9 +29,15 @@ if(isset($_POST['prenom'], $_POST['nom'], $_POST['email'], $_POST['password'], $
 <section class="container pb-4 mb-5">
     <div class="d-flex justify-content-center">
       <div>
+      <div class="form-group">
           <h2 class="text-center">S'enregistrer</h2>
           <p>Veuillez créer votre compte pour accéder au site</p>
           <form method="POST" action="./register.php">
+            <?php if($different_password): ?>
+              <div class="alert alert-danger">
+                    <?= $different_password ?>
+                </div>
+            <?php endif ?>
               <div class="form-group">
                   <label for="" class="mb-2">Prénom</label>
                   <input type="text" name="prenom" placeholder="Prénom" class="form-control" required>
@@ -51,7 +63,6 @@ if(isset($_POST['prenom'], $_POST['nom'], $_POST['email'], $_POST['password'], $
               </div>
               <label class="form-group mt-3" for="">Classe</label>
                 <select class="form-select" name="select" select>
-                  <option selected>Choisir...</option>
                   <?php foreach($classes as $classe): ?>
                  <option value="<?= $classe['CLASSE'] ?>"><?= $classe['CLASSE'] ?></option>
                 <?php endforeach; ?>
@@ -72,6 +83,6 @@ if(isset($_POST['prenom'], $_POST['nom'], $_POST['email'], $_POST['password'], $
 
 <?php 
 
-require dirname(__DIR__ , 2) . '/assets/components/header.php';
+require dirname(__DIR__ , 2) . '/assets/components/footer.php';
 
 ?>
