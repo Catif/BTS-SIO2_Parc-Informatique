@@ -30,14 +30,14 @@ if(isset($_POST['password'])){
         ':mot_de_passe' => password_hash($_POST['password'], PASSWORD_DEFAULT)
       ]);
     }
-
+    $last_id = $db->returnLastInsertId();
     $query = $db->query("INSERT INTO detient (ID_UTILISATEUR, FAI, CAMERA, MICROPHONE) VALUES (:ID_UTILISATEUR, 0, 0, 0)",
     [
-      ':ID_UTILISATEUR' => $db->returnLastInsertId()
+      ':ID_UTILISATEUR' => $last_id
     ]);
 
     $_SESSION['role'] = 'user';
-    $_SESSION['id_utilisateur'] = $db->returnLastInsertId();
+    $_SESSION['id_utilisateur'] = $last_id;
     header('location:' . BASE_URL . '/views/panel/equipement.php');
     die();
   } else {
