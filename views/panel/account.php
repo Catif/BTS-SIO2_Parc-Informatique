@@ -79,10 +79,12 @@ $user = $query->fetch();
                     <label for="" class="mb-2 ">E-Mail :</label>
                     <input type="email" name="email" value="<?= $user['MAIL'] ?>" class="form-control" required>
                 </div>
-                <div class="form-group mt-3">
-                    <label for="" class="mb-2">Classe :</label>
-                    <input type="text" name="classe" value="<?= $user['CLASSE'] ?>" class="form-control" disabled>
-                </div>
+                <?php if($_SESSION['role'] !== 'admin'): ?>
+                    <div class="form-group mt-3">
+                        <label for="" class="mb-2">Classe :</label>
+                        <input type="text" name="classe" value="<?= $user['CLASSE'] ?>" class="form-control" disabled>
+                    </div>
+                <?php endif; ?>
                 <div class="text-center w-100">
                     <input type="hidden" name="action" value="change_mail">
                     <button type="submit" class="btn btn-primary mt-3">Sauvegarder</button>
@@ -94,7 +96,7 @@ $user = $query->fetch();
                 <form method="POST" action="">
                     <h3 class="text-center mb-4">Changer de mot de passe</h2>
                     <div class="form-group">
-                        <label for="" class="mb-2">Mot de passe Actuel :</label>
+                        <label for="" class="mb-2">Mot de passe actuel :</label>
                         <input type="password" name="password_actuel" placeholder="Inscrivez votre mot de passe actuelle" class="form-control">
                     </div>
                     <div class="form-group mt-3">

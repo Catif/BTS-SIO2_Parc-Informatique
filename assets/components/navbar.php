@@ -13,10 +13,10 @@
                 <a href="<?= BASE_URL .'/views/panel/equipement.php' ?>" class="nav-link">Mes équipement</a>
             <?php endif; ?>
             <?php if($_SESSION['role'] === 'reader'): ?>
-                <a href="<?= BASE_URL .'/views/panel/admin/panel.php' ?>" class="nav-link">Visualisation</a>
+                <a href="<?= BASE_URL .'/views/panel/admin.php' ?>" class="nav-link">Visualisation</a>
             <?php endif; ?>
             <?php if($_SESSION['role'] === 'admin'): ?>
-                <a href="<?= BASE_URL .'/views/panel/admin/panel.php' ?>" class="nav-link">Administration</a>
+                <a href="<?= BASE_URL .'/views/panel/admin.php' ?>" class="nav-link">Administration</a>
             <?php endif; ?>
             <?php if($_SESSION['role'] !== 'visitor'): ?>
                 <a href="<?= BASE_URL .'/views/panel/account.php' ?>" class="nav-link">Mon compte</a>

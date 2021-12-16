@@ -23,4 +23,13 @@ class Database{
         }
         return false;
     }
+
+    public function returnLastInsertId(string $sql, array $params = [])
+    {
+        if($this->pdo !== null){
+            return $this->pdo->lastInsertId($sql);
+
+        }
+        return false;
+    }
 }
