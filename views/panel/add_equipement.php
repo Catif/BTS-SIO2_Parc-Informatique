@@ -1,6 +1,6 @@
 <?php 
 session_start();
-
+$error = null;
 $title = 'Ajout d\'équipement';
 require dirname(__DIR__ , 2) . '/assets/components/header.php';
 
@@ -9,19 +9,31 @@ if($_SESSION['role'] === 'visitor'){
     header('Location: '. BASE_URL . '/');
     die();
 }
+if(isset($_POST['type'])){
+    if($_POST['type'] === 'default'){
+        unset($_POST['type']);
+        $error = 'Vous devez choisir une valeur parmis celle proposer.';
+    }
+}
 ?>
 
 <div class="container pb-4">
+    
 
     <?php if(!isset($_POST['type'])): ?>
         <h2 class="text-center mb-4">Choix de l'équipement :</h2>
+        <?php if($error !== null): ?>
+            <div class="alert alert-danger text-center">
+                <?= $error ?>
+            </div>
+        <?php endif; ?>
         <div class="row d-flex justify-content-center">
             <form class="col-6" action="./add_equipement.php" method="POST">
                 <div class="row">
                     <div class="col-8">
                         <label class="form-label">Equipement</label>
                         <select name='type' class="form-select" required>
-                            <option selected>Choisir...</option>
+                            <option value="default" selected>Choisir...</option>
                             <option value="portable">Téléphone</option>
                             <option value="tablette">Tablette</option>
                             <option value="ordi_portable">PC Portable</option>
