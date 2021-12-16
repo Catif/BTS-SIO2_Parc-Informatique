@@ -28,12 +28,13 @@ if(isset($_POST['email'], $_POST['password'])) {
         if(password_verify($_POST['password'], $user['mot_de_passe'])){
             $_SESSION['role'] = $user['role'];
             $_SESSION['id_utilisateur'] = $user['id_utilisateur'];
-            $_SESSION['id_utilisateur'] = $user['type'];
+            $_SESSION['type'] = $user['type'];
             if($user['role'] === 'user'){
                 header('Location:'. BASE_URL .'/views/panel/equipement.php');
                 exit();
             } else{
                 header('Location:'. BASE_URL .'/views/panel/admin.php');
+                exit();
             }
         } else {
             $erreur = "Identifiant ou mot de passe incorrect";

@@ -14,17 +14,13 @@ if($_SESSION['role'] === 'visitor' || (($_SESSION['role'] === 'admin' || $_SESSI
 require dirname(__DIR__ , 2) . '/assets/components/header.php';
 
 if(isset($_GET['id']) && ($_SESSION['role'] === 'admin' || $_SESSION['role'] === 'reader')){
-    $_SESSION['id_utilisateur_admin'] = $_GET['id'];
-    $id = $_SESSION['id_utilisateur_admin'];
-} else{
-    if(isset($_SESSION['id_utilisateur'])){
-        $id = $_SESSION['id_utilisateur'];
-    }
+    $_SESSION['id_utilisateur_temp'] = $_GET['id'];
+    $id = $_SESSION['id_utilisateur_temp'];
+} elseif($_SESSION['role'] === 'user'){
+    $id = $_SESSION['id_utilisateur'];
+} elseif(isset($_SESSION['id_utilisateur_temp'])){
+    $id = $_SESSION['id_utilisateur_temp'];
 }
-
-
-
-
 
 
 
@@ -226,11 +222,9 @@ $detient = $query->fetch();
 ?>
 
 
-<!-- <?php
-echo('<pre>');
-var_dump($_POST);
-echo('</pre>');
-?> -->
+<?php
+
+?>
 
 <div class="container pb-4">
     <h2 class="text-center mb-4"><?= $title ?></h2>

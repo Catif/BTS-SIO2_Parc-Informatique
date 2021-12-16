@@ -41,7 +41,6 @@ if(isset($_POST['type'])){
                             <option value="tablette">Tablette</option>
                             <option value="ordi_portable">PC Portable</option>
                             <option value="ordi_fixe">PC Fixe</option>
-                            <option value="autre">Autre</option>
                         </select>
                     </div>
                     <div class="col-4 d-flex align-items-end">

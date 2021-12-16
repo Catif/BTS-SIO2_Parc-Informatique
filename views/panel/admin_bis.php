@@ -69,7 +69,7 @@ if(isset($_GET['action'])){
         $query = $db->query("INSERT INTO utilisateur (classe, type, nom, prenom, mail, mot_de_passe, role) 
         VALUES (:classe, :type, :nom, :prenom, :mail, :mot_de_passe, :role)",
         [
-          ':classe' => isset($_POST['classe']) ? $_POST['classe'] : null,
+          ':classe' => !empty($_POST['classe']) ? $_POST['classe'] : null,
           ':type' => $_POST['role'],
           ':nom' => strtoupper($_POST['nom']),
           ':prenom' => ucfirst(strtolower($_POST['prenom'])),
@@ -181,15 +181,15 @@ echo('</pre>');
                     <form method="POST" action=""> 
                       <div class="form-group">
                           <label for="" class="mb-2">Prénom :</label>
-                          <input type="text" name="prenom" placeholder="Prénom" class="form-control" value = "<?= isset($_POST['prenom']) ? $_POST['prenom']: '';?>" required>
+                          <input type="text" name="prenom" placeholder="Prénom" class="form-control" required>
                         </div>
                       <div class="form-group mt-3">
                           <label for="" class="mb-2">Nom :</label>
-                          <input type="text" name="nom" placeholder="Nom" class="form-control" value = "<?= isset($_POST['nom']) ? $_POST['nom']: '';?>" required>
+                          <input type="text" name="nom" placeholder="Nom" class="form-control" required>
                       </div>
                       <div class="form-group mt-3">
                           <label for="" class="mb-2 ">E-Mail :</label>
-                          <input type="email" name="email" placeholder="Courrier électronique" class="form-control" value = "<?= isset($_POST['email']) ? $_POST['email']: '';?>" required>
+                          <input type="email" name="email" placeholder="Courrier électronique" class="form-control" required>
                       </div>
                       <div class="form-group mt-3">
                           <div class="d-flex justify-content-between">
