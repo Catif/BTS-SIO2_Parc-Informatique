@@ -8,13 +8,10 @@ require dirname(__DIR__ , 2) . '/assets/components/header.php';
 $erreur = null;
 
 if(isset($_POST['email'], $_POST['password'])) {
-    var_dump($_POST);
     $query = $db->query('SELECT id_utilisateur, utilisateur.role, mot_de_passe FROM utilisateur WHERE mail = :mail', [
         ':mail' => $_POST['email'],
     ]);
     $user = $query->fetch();
-
-    
     
 
     if(password_verify($_POST['password'], $user['mot_de_passe'])){

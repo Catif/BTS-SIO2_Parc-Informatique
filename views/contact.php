@@ -8,15 +8,15 @@ require '../assets/components/header.php';
 <section class="container pb-3">
     <div class="d-flex justify-content-center">
         <div>
-        <h2 class="text-center">Connexion</h2>
-        <p>Veuillez rentrer vos informations pour accéder au site</p>
+        <h2 class="text-center">Nous contacter</h2>
+        <p>Veuillez rentrer vos informations et décrire votre situation</p>
         <form method="POST" action="./contact.php">
             <div class="mb-3 form-group">
-                <label for="" class="mb-2">Adresse électronique</label>
+                <label for="" class="mb-2">Adresse électronique :</label>
                 <input type="email" name="email" placeholder="Entrez votre adresse mail" class="form-control" required>
             </div>
             <div class="mb-3 form-group">
-                <label for="" class="mb-2">Adresse électronique :</label>
+                <label for="" class="mb-2">Nom complet :</label>
                 <input type="text" name="name-firstname" placeholder="Entrez votre nom et prénom" class="form-control" required>
             </div>
             <div class="mb-3 form-group">

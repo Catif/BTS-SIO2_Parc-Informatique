@@ -21,7 +21,6 @@ if(isset($_POST['password'])){
         ':mot_de_passe' => password_hash($_POST['password'], PASSWORD_DEFAULT)
       ]);
     }
-    require_once dirname(__DIR__, 2) . '/config.php';
     $_SESSION['role'] = 'user';
     $_SESSION['id_utilisateur'] = $db->returnLastInsertId();
     header('location:' . BASE_URL . '/views/panel/equipement.php');
