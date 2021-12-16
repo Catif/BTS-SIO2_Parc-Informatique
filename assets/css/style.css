@@ -90,3 +90,9 @@ a.card{
 .input-required{
     color: red;
 }
+
+
+.box{
+    background-color: hsl(261, 68%, 92%);
+    border-radius: 5px;
+}
