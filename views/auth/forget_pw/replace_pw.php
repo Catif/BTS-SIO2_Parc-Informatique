@@ -6,7 +6,7 @@ $error = null;
 
 if(isset($_POST['password'], $_POST['confirm_password'])){
     if($_POST['password'] === $_POST['confirm_password']){
-    header('location:' . BASE_URL);
+    header('location:' . BASE_URL . '/views/auth/login.php');
     } else {
         $error = 'Les valeurs ne correspondent pas.';
     }
