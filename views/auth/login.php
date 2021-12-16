@@ -67,7 +67,7 @@ if(isset($_POST['email'], $_POST['password'])) {
                     
                 </div>
                 <p>
-                    <a class="form-text" href="<?= BASE_URL . '/views/auth/forget_password.php'?>">Mot de passe oublié ?</a>
+                    <a class="form-text" href="<?= BASE_URL . '/views/auth/forget_pw/send_mail.php'?>">Mot de passe oublié ?</a>
                 </p>
 
                 <button type="submit" class="btn btn-primary w-100 mt-2">Connexion</button>
