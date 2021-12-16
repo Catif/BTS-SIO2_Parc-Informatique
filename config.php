@@ -8,13 +8,13 @@ if( session_status() == PHP_SESSION_NONE ){
 }
 
 // Définir le chemin de l'application
-define("BASE_URL", "http://localhost:8000");
+define("BASE_URL", "http://localhost:3000");
 define("SITE_ROOT", __DIR__);
 
 // Initialisation de la base de donnée
 require_once SITE_ROOT . "/assets/class/database.php";
 $db_host = 'localhost';
-$db_name = 'challenge_sio2';
+$db_name = 'parc_informatique'; //   challenge_sio2    -    parc_informatique
 $db_user = 'root';
 $db_pswd = '';
 $db_parameter = [
