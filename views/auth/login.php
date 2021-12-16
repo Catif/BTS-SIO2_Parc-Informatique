@@ -8,13 +8,17 @@ require dirname(__DIR__ , 2) . '/assets/components/header.php';
 $erreur = null;
 
 if(isset($_POST['email'], $_POST['password'])) {
+    var_dump($_POST);
     $query = $db->query('SELECT id_utilisateur, utilisateur.role, mot_de_passe FROM utilisateur WHERE mail = :mail', [
-        ':mail' => $_POST['email']
+        ':mail' => $_POST['email'],
     ]);
     $user = $query->fetch();
-    $hashed = password_hash($_POST['password'], PASSWORD_DEFAULT);
+    echo('<br>');
+    var_dump($user);
+    var_dump($user['mot_de_passe']);
+    
 
-    if(password_verify($_POST['password'], $hashed)){
+    if(password_verify($_POST['password'], $user['mot_de_passe'])){
         $_SESSION['role'] = $user['role'];
         $_SESSION['id_utilisateur'] = $user['id_utilisateur'];
         if($user['role'] === 'user'){
