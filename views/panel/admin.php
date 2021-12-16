@@ -113,30 +113,37 @@ $equipements_users['detient'] = $query->fetch();
                     <tr>
                         <th scope="row">Tablette</th>
                         <td><?= $equipements_users['tablette'][0] ?></td>
+                        <td><a class="btn btn-primary" href="./stats.php?q='portable'">Voir liste</a></td>
                     </tr>
                     <tr>
                         <th scope="row">PC Portable</th>
                         <td><?= $equipements_users['ordi_portable'][0][0] ?></td>
+                        <td><a class="btn btn-primary" href="./stats.php?q='portable'">Voir liste</a></td>
                     </tr>
                     <tr>
                         <th scope="row">PC Fixe</th>
                         <td><?= $equipements_users['ordi_fixe'][0] ?></td>
+                        <td><a class="btn btn-primary" href="./stats.php?q='portable'">Voir liste</a></td>
                     </tr>
                     <tr>
                         <th scope="row">PC de la région</th>
                         <td><?= $equipements_users['ordi_portable'][1][0] ?></td>
+                        <td><a class="btn btn-primary" href="./stats.php?q='portable'">Voir liste</a></td>
                     </tr>
                     <tr>
                         <th scope="row">Webcam</th>
                         <td><?= $equipements_users['detient'][1] ?></td>
+                        <td><a class="btn btn-primary" href="./stats.php?q='portable'">Voir liste</a></td>
                     </tr>
                     <tr>
                         <th scope="row">Microphone</th>
                         <td><?= $equipements_users['detient'][2] ?></td>
+                        <td><a class="btn btn-primary" href="./stats.php?q='portable'">Voir liste</a></td>
                     </tr>
                     <tr>
                         <th scope="row">Connexion internet</th>
                         <td><?= $equipements_users['detient'][0] ?></td>
+                        <td><a class="btn btn-primary" href="./stats.php?q='portable'">Voir liste</a></td>
                     </tr>
                 </tbody>
             </table>
