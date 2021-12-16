@@ -24,10 +24,10 @@ class Database{
         return false;
     }
 
-    public function returnLastInsertId(string $sql, array $params = [])
+    public function returnLastInsertId()
     {
         if($this->pdo !== null){
-            return $this->pdo->lastInsertId($sql);
+            return $this->pdo->lastInsertId();
 
         }
         return false;

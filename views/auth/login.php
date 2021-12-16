@@ -13,9 +13,8 @@ if(isset($_POST['email'], $_POST['password'])) {
         ':mail' => $_POST['email'],
     ]);
     $user = $query->fetch();
-    echo('<br>');
-    var_dump($user);
-    var_dump($user['mot_de_passe']);
+
+    
     
 
     if(password_verify($_POST['password'], $user['mot_de_passe'])){
