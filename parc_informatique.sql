@@ -52,9 +52,6 @@ DROP TABLE IF EXISTS `detient`;
 CREATE TABLE IF NOT EXISTS `detient` (
   `ID` int(11) NOT NULL AUTO_INCREMENT,
   `ID_UTILISATEUR` int(11) DEFAULT NULL,
-  `PORTABLE` tinyint(1) NOT NULL,
-  `ORDI_FIXE` tinyint(1) NOT NULL,
-  `ORDI_PORTABLE` tinyint(1) NOT NULL,
   `FAI` tinyint(1) NOT NULL,
   `CAMERA` tinyint(1) NOT NULL,
   `MICROPHONE` tinyint(1) NOT NULL,
