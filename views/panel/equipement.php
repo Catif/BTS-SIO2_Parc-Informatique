@@ -216,7 +216,9 @@ $detient = $query->fetch();
 
 
 
-
+if($_SESSION['role'] !== 'user'){
+    $title = 'Ses équipements';
+}
 
 
 ?>
@@ -262,14 +264,16 @@ $detient = $query->fetch();
                 <h5 class="text-center card-title">Equipements divers</h5>
             </div>
         </button>
-        <a class="card card-ext mx-1" href="./add_equipement.php">
-            <div class="card-img-top text-center">
-                <i class="bi bi-plus"></i>
-            </div>
-            <div class="card-body w-100">
-                <h5 class="text-center card-title">Ajouter un équipement</h5>
-            </div>
-        </a>
+        <?php if($_SESSION['role'] !== 'reader'): ?>
+            <a class="card card-ext mx-1" href="./add_equipement.php">
+                <div class="card-img-top text-center">
+                    <i class="bi bi-plus"></i>
+                </div>
+                <div class="card-body w-100">
+                    <h5 class="text-center card-title">Ajouter un équipement</h5>
+                </div>
+            </a>
+        <?php endif; ?>
     </div>
 </div>
 <div class="modal fade" id="modals-divers" tabindex="-1" aria-hidden="true">
@@ -283,31 +287,33 @@ $detient = $query->fetch();
                 <div class="modal-body">
                     <div class="form-group">
                         <label class="mb-2">Possession d'un microphone :</label>
-                        <select name="mic" class="form-select" required>
+                        <select name="mic" class="form-select" required <?= ($_SESSION['role'] === 'reader')? 'disabled' :'' ?>>
                             <option value="0" <?= ($detient['MICROPHONE'] === '0')? 'selected' : '' ?>>Non</option>
                             <option value="1" <?= ($detient['MICROPHONE'] === '1')? 'selected' : '' ?>>Oui</option>
                         </select>
                     </div>
                     <div class="form-group">
                         <label class="mb-2">Possession d'une caméra :</label>
-                        <select name="camera" class="form-select" required>
+                        <select name="camera" class="form-select" required <?= ($_SESSION['role'] === 'reader')? 'disabled' :'' ?>>
                             <option value="0" <?= ($detient['CAMERA'] === '0')? 'selected' : '' ?>>Non</option>
                             <option value="1" <?= ($detient['CAMERA'] === '1')? 'selected' : '' ?>>Oui</option>
                         </select>
                     </div>
                     <div class="form-group">
                         <label class="mb-2">Possession d'une connexion internet à la maison :</label>
-                        <select name="fai" class="form-select" required>
+                        <select name="fai" class="form-select" required <?= ($_SESSION['role'] === 'reader')? 'disabled' :'' ?>>
                             <option value="0" <?= ($detient['FAI'] === '0')? 'selected' : '' ?>>Non</option>
                             <option value="1" <?= ($detient['FAI'] === '1')? 'selected' : '' ?>>Oui</option>
                         </select>
                     </div>
                 </div>
-                <div class="modal-footer">
-                    <input type="hidden" name="action" value="detient">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
-                    <button type="submit" class="btn btn-primary">Sauvegarder</button>
-                </div>
+                <?php if($_SESSION['role'] !== 'reader'): ?>
+                    <div class="modal-footer">
+                        <input type="hidden" name="action" value="detient">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                        <button type="submit" class="btn btn-primary">Sauvegarder</button>
+                    </div>
+                <?php endif; ?>
             </div>
         </div>
     </form>

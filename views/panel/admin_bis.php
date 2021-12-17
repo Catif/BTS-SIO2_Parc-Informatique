@@ -135,9 +135,11 @@ echo('</pre>');
                                 <?php endif; ?>
                                 <th scope="col">Classe</th>
                                 <?php if(isset($_GET['recherche_type']) && $_GET['recherche_type'] === 'Etudiant'):?>
-                                    <th scope="col">Editer</th>
+                                    <th scope="col"><?= $_SESSION['role'] === 'admin' ? 'Editer' : 'Visionner' ?></th>
                                 <?php endif; ?>
-                                <th scope="col d-flex justify-content-center">Supprimer</th>
+                                <?php if($_SESSION['role'] === 'admin'): ?>
+                                    <th scope="col d-flex justify-content-center">Supprimer</th>
+                                <?php endif; ?>
                             </tr>
                         </thead>
                         <tbody>
@@ -157,16 +159,18 @@ echo('</pre>');
                                     <td><?= $result['CLASSE'] ?></td>
                                     <?php if(isset($_GET['recherche_type']) && $_GET['recherche_type'] === 'Etudiant'):?>
                                         <td>
-                                            <a href="./equipement.php?id=<?= $id ?>"><i class="bi bi-pencil-fill me-2"></i>Editer</a>
+                                            <a class="btn btn-primary w-100" href="./equipement.php?id=<?= $id ?>"><?= $_SESSION['role'] === 'admin' ? '<i class="bi bi-pencil-fill me-2"></i>Editer' : '<i class="bi bi-eye-fill me-2"></i>Visionner' ?></a>
                                         </td>
                                     <?php endif; ?>
-                                    <td>
-                                        <form action="" method="POST">
-                                            <button class="btn btn-light w-100"><i class="bi bi-trash-fill me-2"></i></button>
-                                            <input type="hidden" name="id" value="<?= $id ?>">
-                                            <input type="hidden" name="option" value="delete">
-                                        </form>
-                                    </td>
+                                    <?php if($_SESSION['role'] === 'admin'): ?>
+                                        <td>
+                                            <form action="" method="POST">
+                                                <button class="btn btn-light w-100"><i class="bi bi-trash-fill me-2"></i></button>
+                                                <input type="hidden" name="id" value="<?= $id ?>">
+                                                <input type="hidden" name="option" value="delete">
+                                            </form>
+                                        </td>
+                                    <?php endif; ?>
                                 </tr>
                             <?php endforeach ?>
                         </tbody>
