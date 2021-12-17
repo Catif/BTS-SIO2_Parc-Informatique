@@ -8,15 +8,19 @@ if( session_status() == PHP_SESSION_NONE ){
 }
 
 // Définir le chemin de l'application
+// exemple : http://localhost:3000/challenge_sio2
+// Important : Ne pas finir le lien par un '/'
 define("BASE_URL", "http://localhost:3000");
 define("SITE_ROOT", __DIR__);
 
-// Initialisation de la base de donnée
 require_once SITE_ROOT . "/assets/class/database.php";
+
+// Initialisation de la base de donnée
 $db_host = 'localhost';
-$db_name = 'parc_informatique'; //   challenge_sio2    -    parc_informatique
+$db_name = 'parc_informatique';
 $db_user = 'root';
 $db_pswd = '';
+
 $db_parameter = [
     PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES UTF8",
     PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
