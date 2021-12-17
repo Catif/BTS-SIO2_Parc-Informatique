@@ -40,7 +40,11 @@ if(isset($type)){
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title"><?= $title ?> n°<?= $id ?></h5>
+                    <div class="d-flex flex-column">
+                        <h5 class="modal-title"><?= $title ?> n°<?= $id ?></h5>
+                        <p class="small mb-0">Fiche créée le <?= $equipement['CREATED_AT'] ?></p>
+                        <p class="small mb-0">Dernière modification le <?= $equipement['EDITED_AT'] ?></p>
+                    </div>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">

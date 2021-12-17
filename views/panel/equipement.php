@@ -6,7 +6,7 @@ $error = null;
 $id = null;
 
 require_once dirname(__DIR__,2) . '/config.php';
-if($_SESSION['role'] === 'visitor' || (($_SESSION['role'] === 'admin' || $_SESSION['role'] === 'reader') && !isset($_GET))){
+if($_SESSION['role'] === 'visitor' || (($_SESSION['role'] === 'admin' || $_SESSION['role'] === 'reader') && empty($_GET))){
     header('Location: '. BASE_URL . '/');
     die();
 }
@@ -121,8 +121,11 @@ if(isset($_POST['action']) and $_POST['action'] === 'delete'){
 
 
 if(isset($_POST['action']) and $_POST['action'] === 'edit'){
+    date_default_timezone_set('Europe/Paris');
+    $edited_at = new DateTime();
+    $edited_at = $edited_at->format('Y-m-d H:i:s');
     if($_POST['type'] === 'portable'){
-        $sql = $db->query("UPDATE portable SET MODELE = :modele, OS = :os, PROCESSEUR = :processeur, RAM = :ram, STOCKAGE = :stockage, FAI = :fai, DATA_GO = :data_go WHERE ID = :id AND id_utilisateur = :id_user",[
+        $sql = $db->query("UPDATE portable SET MODELE = :modele, OS = :os, PROCESSEUR = :processeur, RAM = :ram, STOCKAGE = :stockage, FAI = :fai, DATA_GO = :data_go, EDITED_AT = :edited_at WHERE ID = :id AND id_utilisateur = :id_user",[
             ':id_user' => $id,
             ':id' => $_POST['id'],
             ':modele' => isset($_POST['modele']) ? $_POST['modele'] : null,
@@ -132,12 +135,13 @@ if(isset($_POST['action']) and $_POST['action'] === 'edit'){
             ':stockage' => isset($_POST['goStockage']) ? (int)$_POST['goStockage'] : null,
             ':fai' => isset($_POST['FAI']) ? $_POST['FAI'] : null,
             ':data_go' => isset($_POST['goData']) ? (float)$_POST['goData'] : null,
+            ':edited_at' => $edited_at
         ]);
         $success = 'Vos informations ont bien été mis à jour.';
     }
 
     if($_POST['type'] ==='tablette'){
-        $sql = $db->query("UPDATE tablette SET MODELE = :modele, OS = :os, PROCESSEUR = :processeur, RAM = :ram, STOCKAGE = :stockage, FAI = :fai, DATA_GO = :data_go WHERE ID = :id AND id_utilisateur = :id_user",[
+        $sql = $db->query("UPDATE tablette SET MODELE = :modele, OS = :os, PROCESSEUR = :processeur, RAM = :ram, STOCKAGE = :stockage, FAI = :fai, DATA_GO = :data_go, EDITED_AT = :edited_at WHERE ID = :id AND id_utilisateur = :id_user",[
             ':id_user' => $id,
             ':id' => $_POST['id'],
             ':modele' => isset($_POST['modele']) ? $_POST['modele'] : null,
@@ -147,12 +151,13 @@ if(isset($_POST['action']) and $_POST['action'] === 'edit'){
             ':stockage' => isset($_POST['goStockage']) ? (int)$_POST['goStockage'] : null,
             ':fai' => isset($_POST['FAI']) ? $_POST['FAI'] : null,
             ':data_go' => isset($_POST['goData']) ? (float)$_POST['goData'] : null,
+            ':edited_at' => $edited_at
         ]);
         $success = 'Vos informations ont bien été mis à jour.';
     }
 
     if($_POST['type'] === 'ordi_portable'){
-        $sql = $db->query("UPDATE ordi_portable SET REGION = :region, OS = :os, PROCESSEUR = :processeur, CARTE_GRAPHIQUE = :carte_graphique, RAM = :ram, STOCKAGE = :stockage WHERE ID = :id AND id_utilisateur = :id_user",[
+        $sql = $db->query("UPDATE ordi_portable SET REGION = :region, OS = :os, PROCESSEUR = :processeur, CARTE_GRAPHIQUE = :carte_graphique, RAM = :ram, STOCKAGE = :stockage, EDITED_AT = :edited_at WHERE ID = :id AND id_utilisateur = :id_user",[
             ':id_user' => $id,
             ':id' => $_POST['id'],
             ':region' => isset($_POST['region']) ? $_POST['region'] : 0,
@@ -160,20 +165,22 @@ if(isset($_POST['action']) and $_POST['action'] === 'edit'){
             ':processeur' => isset($_POST['cpu']) ? $_POST['cpu'] : null,
             ':carte_graphique' => isset($_POST['gpu']) ? $_POST['gpu'] : null,
             ':ram' => isset($_POST['goRAM']) ? (int)$_POST['goRAM'] : null,
-            ':stockage' => isset($_POST['goStockage']) ? (int)$_POST['goStockage'] : null
+            ':stockage' => isset($_POST['goStockage']) ? (int)$_POST['goStockage'] : null,
+            ':edited_at' => $edited_at
         ]);
         $success = 'Vos informations ont bien été mis à jour.';
     }
 
     if($_POST['type'] === 'ordi_fixe'){
-        $sql = $db->query("UPDATE ordi_fixe SET OS = :os, PROCESSEUR = :processeur, CARTE_GRAPHIQUE = :carte_graphique, RAM = :ram, STOCKAGE = :stockage WHERE ID = :id AND id_utilisateur = :id_user",[
+        $sql = $db->query("UPDATE ordi_fixe SET OS = :os, PROCESSEUR = :processeur, CARTE_GRAPHIQUE = :carte_graphique, RAM = :ram, STOCKAGE = :stockage, EDITED_AT = :edited_at WHERE ID = :id AND id_utilisateur = :id_user",[
             ':id_user' => $id,
             ':id' => $_POST['id'],
             ':os' => isset($_POST['os']) ? $_POST['os'] : null,
             ':processeur' => isset($_POST['cpu']) ? $_POST['cpu'] : null,
             ':carte_graphique' => isset($_POST['gpu']) ? $_POST['gpu'] : null,
             ':ram' => isset($_POST['goRAM']) ? (int)$_POST['goRAM'] : null,
-            ':stockage' => isset($_POST['goStockage']) ? (int)$_POST['goStockage'] : null
+            ':stockage' => isset($_POST['goStockage']) ? (int)$_POST['goStockage'] : null,
+            ':edited_at' => $edited_at
         ]);
         $success = 'Vos informations ont bien été mis à jour.';
     }

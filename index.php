@@ -1,7 +1,7 @@
 <?php
 require_once './config.php';
 if($_SESSION['role'] !== 'visitor'){
-    if($_SESSION['role'] === 'reader'){
+    if($_SESSION['role'] !== 'user'){
         header('Location: '. BASE_URL . '/views/panel/admin.php');
     } else{
         header('Location: '. BASE_URL . '/views/panel/equipement.php');
@@ -10,7 +10,6 @@ if($_SESSION['role'] !== 'visitor'){
 }
 
 $title = 'Accueil - Parc Informatique';
-
 require './assets/components/header.php';
 ?>
 
