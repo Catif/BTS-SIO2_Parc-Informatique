@@ -26,12 +26,17 @@ if(isset($_GET['possede'])){
 
     $query = null;
     if($categorie === 'appareil'){
-        if($possede === '1'){
+        if($_GET['q'] === 'region'){
             $title = 'Liste des élèves possédant des ' . $_GET['name'] . ' :'; 
-            $query = $db->query("SELECT PRENOM, NOM, CLASSE FROM utilisateur WHERE EXISTS ( SELECT $table.id_utilisateur FROM $table where utilisateur.id_utilisateur = $table.id_utilisateur) && TYPE = 'Etudiant' $sql_classe", []);
-        } else {
-            $title = 'Liste des élèves ne possédant pas de ' . $_GET['name'] . ' :'; 
-            $query = $db->query("SELECT PRENOM, NOM, CLASSE FROM utilisateur WHERE NOT EXISTS ( SELECT $table.id_utilisateur FROM $table where utilisateur.id_utilisateur = $table.id_utilisateur) && TYPE = 'Etudiant' $sql_classe", []);
+            $query = $db->query("SELECT PRENOM, NOM, CLASSE FROM utilisateur WHERE EXISTS ( SELECT ordi_portable.id_utilisateur FROM ordi_portable where utilisateur.id_utilisateur = ordi_portable.id_utilisateur && ordi_portable.region = '1') && TYPE = 'Etudiant' $sql_classe", []);
+        } else{
+            if($possede === '1'){
+                $title = 'Liste des élèves possédant des ' . $_GET['name'] . ' :'; 
+                $query = $db->query("SELECT PRENOM, NOM, CLASSE FROM utilisateur WHERE EXISTS ( SELECT $table.id_utilisateur FROM $table where utilisateur.id_utilisateur = $table.id_utilisateur) && TYPE = 'Etudiant' $sql_classe", []);
+            } else {
+                $title = 'Liste des élèves ne possédant pas de ' . $_GET['name'] . ' :'; 
+                $query = $db->query("SELECT PRENOM, NOM, CLASSE FROM utilisateur WHERE NOT EXISTS ( SELECT $table.id_utilisateur FROM $table where utilisateur.id_utilisateur = $table.id_utilisateur) && TYPE = 'Etudiant' $sql_classe", []);
+            }
         }
     } elseif ($categorie === 'detient'){
         $query = $db->query("SELECT PRENOM, NOM, CLASSE FROM utilisateur INNER JOIN $categorie ON $categorie.id_utilisateur = utilisateur.id_utilisateur WHERE utilisateur.type = 'Etudiant' && $categorie.$table = $possede $sql_classe", []);
@@ -105,17 +110,19 @@ if(isset($_GET['possede'])){
                         <h2 class="text-center pt-4 mb-4">Voir la liste des étudiants pour les <?= $_GET['name'] ?></h2>
                         <div class="d-flex justify-content-center">
                             <div class="row w-100">
-                                <div class="col-6">
-                                    <form action=''>
-                                        <input type="hidden" name="categorie" value="<?= $_GET['categorie'] ?>">
-                                        <input type="hidden" name="q" value="<?= $_GET['q'] ?>">
-                                        <input type="hidden" name="name" value="<?= $_GET['name'] ?>">
-                                        <input type="hidden" name="classe" value="<?= isset($_GET['classe']) ? $_GET['classe'] : '' ?>">
-                                        <input type="hidden" name="possede" value="0">
-                                        <button type="submit" class="btn btn-secondary w-100">Etudiant ne possédant pas</button>
-                                    </form>
-                                </div>
-                                <div class="col-6">
+                                <?php if($_SESSION['type'] !== 'RegionEst'): ?>
+                                    <div class="col">
+                                        <form action=''>
+                                            <input type="hidden" name="categorie" value="<?= $_GET['categorie'] ?>">
+                                            <input type="hidden" name="q" value="<?= $_GET['q'] ?>">
+                                            <input type="hidden" name="name" value="<?= $_GET['name'] ?>">
+                                            <input type="hidden" name="classe" value="<?= isset($_GET['classe']) ? $_GET['classe'] : '' ?>">
+                                            <input type="hidden" name="possede" value="0">
+                                            <button type="submit" class="btn btn-secondary w-100">Etudiant ne possédant pas</button>
+                                        </form>
+                                    </div>
+                                <?php endif; ?>
+                                <div class="col">
                                     <form action=''>
                                         <input type="hidden" name="categorie" value="<?= $_GET['categorie'] ?>">
                                         <input type="hidden" name="q" value="<?= $_GET['q'] ?>">
