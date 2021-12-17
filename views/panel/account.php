@@ -80,7 +80,7 @@ $user = $query->fetch();
                     <label for="" class="mb-2 ">E-Mail :</label>
                     <input type="email" name="email" value="<?= $user['MAIL'] ?>" class="form-control" required>
                 </div>
-                <?php if($_SESSION['role'] !== 'admin'): ?>
+                <?php if($_SESSION['role'] !== 'admin' && $_SESSION['type'] !== 'Administration'): ?>
                     <div class="form-group mt-3">
                         <label for="" class="mb-2">Classe :</label>
                         <input type="text" name="classe" value="<?= $user['CLASSE'] ?>" class="form-control" disabled>

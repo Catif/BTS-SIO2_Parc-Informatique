@@ -21,7 +21,7 @@ if(isset($_GET['possede'])){
     $sql_classe = '';
     if(isset($_GET['classe'])){
         $classe = $_GET['classe'];
-        $sql_classe = '&& utilisateur.classe like "%' . $classe.'%"';
+        $sql_classe = "&& CLASSE LIKE '%".$classe."%'";
     }
 
     $query = null;
@@ -34,7 +34,7 @@ if(isset($_GET['possede'])){
             $query = $db->query("SELECT PRENOM, NOM, CLASSE FROM utilisateur WHERE NOT EXISTS ( SELECT $table.id_utilisateur FROM $table where utilisateur.id_utilisateur = $table.id_utilisateur) && TYPE = 'Etudiant' $sql_classe", []);
         }
     } elseif ($categorie === 'detient'){
-        $query = $db->query("SELECT PRENOM, NOM, CLASSE FROM utilisateur INNER JOIN $categorie ON $categorie.id_utilisateur = utilisateur.id_utilisateur WHERE utilisateur.type = 'Etudiant' && $categorie.$table = $possede", []);
+        $query = $db->query("SELECT PRENOM, NOM, CLASSE FROM utilisateur INNER JOIN $categorie ON $categorie.id_utilisateur = utilisateur.id_utilisateur WHERE utilisateur.type = 'Etudiant' && $categorie.$table = $possede $sql_classe", []);
         if($possede === '1'){
             $title = 'Liste des élèves possédant de ' . $_GET['name'] . ' :'; 
         } else{
@@ -110,6 +110,7 @@ if(isset($_GET['possede'])){
                                         <input type="hidden" name="categorie" value="<?= $_GET['categorie'] ?>">
                                         <input type="hidden" name="q" value="<?= $_GET['q'] ?>">
                                         <input type="hidden" name="name" value="<?= $_GET['name'] ?>">
+                                        <input type="hidden" name="classe" value="<?= isset($_GET['classe']) ? $_GET['classe'] : '' ?>">
                                         <input type="hidden" name="possede" value="0">
                                         <button type="submit" class="btn btn-secondary w-100">Etudiant ne possédant pas</button>
                                     </form>
@@ -119,6 +120,7 @@ if(isset($_GET['possede'])){
                                         <input type="hidden" name="categorie" value="<?= $_GET['categorie'] ?>">
                                         <input type="hidden" name="q" value="<?= $_GET['q'] ?>">
                                         <input type="hidden" name="name" value="<?= $_GET['name'] ?>">
+                                        <input type="hidden" name="classe" value="<?= isset($_GET['classe']) ? $_GET['classe'] : '' ?>">
                                         <input type="hidden" name="possede" value="1">
                                         <button type="submit" class="btn btn-primary w-100">Etudiant possédant</button>
                                     </form>
