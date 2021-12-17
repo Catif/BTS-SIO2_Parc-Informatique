@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : mer. 15 déc. 2021 à 13:31
+-- Généré le : ven. 17 déc. 2021 à 09:28
 -- Version du serveur :  10.6.4-MariaDB
 -- Version de PHP : 7.3.21
 
@@ -53,7 +53,6 @@ CREATE TABLE IF NOT EXISTS `detient` (
   `ID` int(11) NOT NULL AUTO_INCREMENT,
   `ID_UTILISATEUR` int(11) DEFAULT NULL,
   `PORTABLE` tinyint(1) NOT NULL,
-  `TABLETTE` tinyint(1) NOT NULL,
   `ORDI_FIXE` tinyint(1) NOT NULL,
   `ORDI_PORTABLE` tinyint(1) NOT NULL,
   `FAI` tinyint(1) NOT NULL,
@@ -62,15 +61,17 @@ CREATE TABLE IF NOT EXISTS `detient` (
   PRIMARY KEY (`ID`),
   UNIQUE KEY `ID` (`ID`),
   KEY `ID_UTILISATEUR` (`ID_UTILISATEUR`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb3;
 
 --
 -- Déchargement des données de la table `detient`
 --
 
-INSERT INTO `detient` (`ID`, `ID_UTILISATEUR`, `PORTABLE`, `TABLETTE`, `ORDI_FIXE`, `ORDI_PORTABLE`, `FAI`, `CAMERA`, `MICROPHONE`) VALUES
-(1, 1, 1, 1, 1, 1, 1, 1, 1),
-(2, 2, 0, 0, 0, 0, 1, 1, 0);
+INSERT INTO `detient` (`ID`, `ID_UTILISATEUR`, `FAI`, `CAMERA`, `MICROPHONE`) VALUES
+(1, 3, 1, 1, 0),
+(2, 10, 0, 0, 1),
+(3, 11, 1, 1, 0),
+(5, 19, 0, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -85,6 +86,8 @@ CREATE TABLE IF NOT EXISTS `fai` (
   `FAI` varchar(32) DEFAULT NULL,
   `DEBIT_ASCENDANT_FAI` double DEFAULT NULL,
   `DEBIT_DESCENDANT_FAI` double DEFAULT NULL,
+  `CREATED_AT` timestamp(6) NOT NULL DEFAULT current_timestamp(6),
+  `EDITED_AT` timestamp(6) NOT NULL DEFAULT current_timestamp(6),
   PRIMARY KEY (`ID`),
   UNIQUE KEY `ID` (`ID`),
   KEY `ID_UTILISATEUR` (`ID_UTILISATEUR`)
@@ -105,10 +108,22 @@ CREATE TABLE IF NOT EXISTS `ordi_fixe` (
   `CARTE_GRAPHIQUE` varchar(32) DEFAULT NULL,
   `RAM` int(11) DEFAULT NULL,
   `STOCKAGE` int(11) DEFAULT NULL,
+  `CREATED_AT` timestamp(6) NOT NULL DEFAULT current_timestamp(6),
+  `EDITED_AT` timestamp(6) NOT NULL DEFAULT current_timestamp(6),
   PRIMARY KEY (`ID`),
   UNIQUE KEY `ID` (`ID`),
   KEY `ID_UTILISATEUR` (`ID_UTILISATEUR`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb3;
+
+--
+-- Déchargement des données de la table `ordi_fixe`
+--
+
+INSERT INTO `ordi_fixe` (`ID`, `ID_UTILISATEUR`, `OS`, `PROCESSEUR`, `CARTE_GRAPHIQUE`, `RAM`, `STOCKAGE`, `CREATED_AT`, `EDITED_AT`) VALUES
+(1, 3, 'Windows', 'dqzd', '', 0, 0, '2021-12-16 23:37:13.542250', '2021-12-16 23:37:13.542250'),
+(2, 3, 'Windows', 'dqzd', '', 0, 0, '2021-12-16 23:39:23.430958', '2021-12-16 23:39:23.430958'),
+(3, 3, 'Windows', 'dqzd', '', 0, 0, '2021-12-16 23:39:33.172095', '2021-12-16 23:39:33.172095'),
+(4, 3, 'Windows', 'dqzd', '', 0, 0, '2021-12-16 23:39:34.416410', '2021-12-16 23:39:34.416410');
 
 -- --------------------------------------------------------
 
@@ -126,10 +141,19 @@ CREATE TABLE IF NOT EXISTS `ordi_portable` (
   `CARTE_GRAPHIQUE` varchar(32) DEFAULT NULL,
   `RAM` int(11) DEFAULT NULL,
   `STOCKAGE` int(11) DEFAULT NULL,
+  `CREATED_AT` timestamp(6) NOT NULL DEFAULT current_timestamp(6),
+  `EDITED_AT` timestamp(6) NOT NULL DEFAULT current_timestamp(6),
   PRIMARY KEY (`ID`),
   UNIQUE KEY `ID` (`ID`),
   KEY `ID_UTILISATEUR` (`ID_UTILISATEUR`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb3;
+
+--
+-- Déchargement des données de la table `ordi_portable`
+--
+
+INSERT INTO `ordi_portable` (`ID`, `ID_UTILISATEUR`, `REGION`, `OS`, `PROCESSEUR`, `CARTE_GRAPHIQUE`, `RAM`, `STOCKAGE`, `CREATED_AT`, `EDITED_AT`) VALUES
+(1, 3, 0, 'Mac', '', '', 0, 0, '2021-12-16 23:36:52.703027', '2021-12-17 09:15:38.000000');
 
 -- --------------------------------------------------------
 
@@ -148,10 +172,22 @@ CREATE TABLE IF NOT EXISTS `portable` (
   `STOCKAGE` int(11) DEFAULT NULL,
   `FAI` varchar(32) DEFAULT NULL,
   `DATA_GO` double DEFAULT NULL,
+  `CREATED_AT` timestamp(6) NOT NULL DEFAULT current_timestamp(6),
+  `EDITED_AT` timestamp(6) NOT NULL DEFAULT current_timestamp(6),
   PRIMARY KEY (`ID`),
   UNIQUE KEY `ID` (`ID`),
   KEY `ID_UTILISATEUR` (`ID_UTILISATEUR`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb3;
+
+--
+-- Déchargement des données de la table `portable`
+--
+
+INSERT INTO `portable` (`ID`, `ID_UTILISATEUR`, `MODELE`, `OS`, `PROCESSEUR`, `RAM`, `STOCKAGE`, `FAI`, `DATA_GO`, `CREATED_AT`, `EDITED_AT`) VALUES
+(1, 9, 'Samsung', 'Android', '', 0, 0, '', 0, '2021-12-16 19:12:05.517992', '2021-12-16 19:12:05.517992'),
+(5, 9, 'Samsung', 'Android', '', 0, 0, '', 0, '2021-12-16 19:12:05.517992', '2021-12-16 19:12:05.517992'),
+(9, 19, 'Samsung', 'Android', '', 0, 0, '', 0, '2021-12-17 08:24:25.973913', '2021-12-17 08:24:25.973913'),
+(10, 19, 'Samsung', 'Android', '', 0, 0, '', 0, '2021-12-17 08:24:39.171796', '2021-12-17 08:24:39.171796');
 
 -- --------------------------------------------------------
 
@@ -170,10 +206,19 @@ CREATE TABLE IF NOT EXISTS `tablette` (
   `STOCKAGE` int(11) DEFAULT NULL,
   `FAI` varchar(32) DEFAULT NULL,
   `DATA_GO` double DEFAULT NULL,
+  `CREATED_AT` timestamp(6) NOT NULL DEFAULT current_timestamp(6),
+  `EDITED_AT` timestamp(6) NOT NULL DEFAULT current_timestamp(6),
   PRIMARY KEY (`ID`),
   UNIQUE KEY `ID` (`ID`),
   KEY `ID_UTILISATEUR` (`ID_UTILISATEUR`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb3;
+
+--
+-- Déchargement des données de la table `tablette`
+--
+
+INSERT INTO `tablette` (`ID`, `ID_UTILISATEUR`, `MODELE`, `OS`, `PROCESSEUR`, `RAM`, `STOCKAGE`, `FAI`, `DATA_GO`, `CREATED_AT`, `EDITED_AT`) VALUES
+(1, 3, 'dqzd', 'autre', '', 1, 0, '', 0, '2021-12-16 23:36:57.180347', '2021-12-17 09:15:31.000000');
 
 -- --------------------------------------------------------
 
@@ -194,16 +239,21 @@ CREATE TABLE IF NOT EXISTS `utilisateur` (
   PRIMARY KEY (`ID_UTILISATEUR`),
   UNIQUE KEY `ID_UTILISATEUR` (`ID_UTILISATEUR`),
   KEY `CLASSE` (`CLASSE`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb3;
 
 --
 -- Déchargement des données de la table `utilisateur`
 --
 
 INSERT INTO `utilisateur` (`ID_UTILISATEUR`, `CLASSE`, `TYPE`, `NOM`, `PRENOM`, `MAIL`, `MOT_DE_PASSE`, `ROLE`) VALUES
-(1, NULL, 'Administrateur', 'BARBIER', 'Bradley', 'bradley.barbier@outlook.fr', 'Shiro5416', 'admin'),
-(2, NULL, 'Administrateur', 'JOLIOT', 'Julien', 'julien.joliot@outlook.fr', 'Hobbaman5416', 'admin'),
-(3, 'SIO2 SISR', 'Etudiant', 'John', 'Doe', 'john.doe@example.com', 'testMdp', 'user');
+(3, 'SIO2 SLAM', 'Etudiant', 'ETUDIANT', 'Etudiant', 'etudiant@etudiant', '$2y$10$z4pZzW5/xzubZDALlY17auLjufpaKzyb1LLZYf9HzZ5Vs0xpUV2lq', 'user'),
+(9, NULL, 'Administrateur', 'ADMIN', 'Admin', 'admin@admin', '$2y$10$fxzluVTKw2PIzCz0nCRUeuPmMtpENZYZZFUg9cgzw/JkyCA7YJpI2', 'admin'),
+(10, 'SIO2 SISR', 'Etudiant', 'ETUDIANT2', 'Etudiant2', 'etudiant2@etudiant2', '$2y$10$dFrfnm1eqaG7P.4ppoOG7e8ajTulWah2zo7z3S.cYbZO7sU6AqT.q', 'user'),
+(11, 'SIO2 SISR', 'Etudiant', 'ETUDIANT3', 'Etudiant3', 'etudiant3@etudiant3', '$2y$10$JdgvrKNVldOaKWjDGE6OB.m2c/tkx3azRGyGMJUFQGbTxNfFqf9Dq', 'user'),
+(12, NULL, 'Administration', 'INFO', 'Info', 'info@info', '$2y$10$rJlbRh9rt2sqb2cY4CR22OZ/XkYunfA1B4U4TGAWZm9fV8PlvA7mK', 'reader'),
+(14, 'SIO2 SLAM', 'Professeur', 'PROF', 'Prof', 'prof@prof', '$2y$10$ajyIQyHfOjXm0iZ0/pfM1ex/Dn1uHyIDJJThTGMfdYNQlU6karAl.', 'reader'),
+(18, NULL, 'RegionEst', 'EST', 'Region', 'region@est', '$2y$10$ePdS2MHke4laxnLnehUSA.KbOnLwvyecVw6bZP58xwgx4KyORxjfC', 'reader'),
+(19, 'SIO2 SISR', 'Etudiant', 'BARBIER', 'Bradley', 'bradley.barbier@outlook.fr', '$2y$10$IKdzbrQEikElQNPuXjSgIOMErt.J9DHvOdMKxL5Fl0iuA7.lINL3S', 'user');
 
 --
 -- Contraintes pour les tables déchargées
@@ -226,12 +276,6 @@ ALTER TABLE `fai`
 --
 ALTER TABLE `ordi_fixe`
   ADD CONSTRAINT `ordi_fixe_ibfk_1` FOREIGN KEY (`ID_UTILISATEUR`) REFERENCES `utilisateur` (`ID_UTILISATEUR`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Contraintes pour la table `ordi_portable`
---
-ALTER TABLE `ordi_portable`
-  ADD CONSTRAINT `ordi_portable_ibfk_1` FOREIGN KEY (`ID_UTILISATEUR`) REFERENCES `utilisateur` (`ID_UTILISATEUR`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Contraintes pour la table `portable`
