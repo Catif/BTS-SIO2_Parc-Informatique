@@ -11,7 +11,7 @@ if($_SESSION['role'] !== 'visitor'){
 
 $title = 'Accueil - Parc Informatique';
 
-require __DIR__ . '/assets/components/header.php';
+require './assets/components/header.php';
 ?>
 
 

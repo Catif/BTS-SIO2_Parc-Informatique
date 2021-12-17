@@ -8,7 +8,7 @@ if(isset($type)){
             break;
         case 'tablette':
             $title = 'Tablette';
-            $icon = 'phone-landscape';
+            $icon = 'tablet-landscape';
             break;
         case 'ordi_portable':
             $title = 'PC Portable';
